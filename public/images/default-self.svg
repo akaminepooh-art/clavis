@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1F5EE"/>
+      <stop offset="100%" stop-color="#EEEDFE"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Brain icon -->
+  <g transform="translate(400,180)" fill="none" stroke="#0F6E56" stroke-width="3" stroke-linecap="round">
+    <ellipse rx="60" ry="70" fill="#0F6E56" opacity="0.08"/>
+    <path d="M-30,-50 Q-50,-40 -45,-15 Q-55,5 -40,20 Q-50,40 -30,50" stroke-width="3.5"/>
+    <path d="M30,-50 Q50,-40 45,-15 Q55,5 40,20 Q50,40 30,50" stroke-width="3.5"/>
+    <path d="M-30,-50 Q-10,-60 10,-55 Q30,-50 30,-50" stroke-width="2.5"/>
+    <path d="M-30,50 Q-10,60 10,55 Q30,50 30,50" stroke-width="2.5"/>
+    <line x1="0" y1="-55" x2="0" y2="55" stroke-width="2" opacity="0.4"/>
+    <circle cx="-15" cy="-20" r="4" fill="#5DCAA5" stroke="none"/>
+    <circle cx="18" cy="-10" r="3" fill="#7F77DD" stroke="none"/>
+    <circle cx="-10" cy="15" r="3.5" fill="#1D9E75" stroke="none"/>
+    <circle cx="12" cy="25" r="3" fill="#5DCAA5" stroke="none"/>
+    <line x1="-15" y1="-20" x2="18" y2="-10" stroke="#5DCAA5" stroke-width="1.5" opacity="0.5"/>
+    <line x1="18" y1="-10" x2="12" y2="25" stroke="#7F77DD" stroke-width="1.5" opacity="0.5"/>
+    <line x1="-10" y1="15" x2="-15" y2="-20" stroke="#1D9E75" stroke-width="1.5" opacity="0.5"/>
+  </g>
+  <text x="400" y="310" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="22" fill="#0F6E56" font-weight="bold">自己理解・診断</text>
+  <text x="400" y="340" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="14" fill="#5DCAA5">あなたの可能性を知る</text>
+  <!-- Decorative dots -->
+  <circle cx="120" cy="80" r="8" fill="#5DCAA5" opacity="0.2"/>
+  <circle cx="680" cy="100" r="12" fill="#7F77DD" opacity="0.15"/>
+  <circle cx="150" cy="380" r="6" fill="#1D9E75" opacity="0.2"/>
+  <circle cx="650" cy="370" r="10" fill="#5DCAA5" opacity="0.15"/>
+</svg>

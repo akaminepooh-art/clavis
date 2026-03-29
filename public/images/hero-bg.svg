@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1F5EE"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EEEDFE"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%">
+      <stop offset="0%" stop-color="#5DCAA5" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <circle cx="640" cy="280" r="200" fill="url(#glow)"/>
+  <!-- Key icon -->
+  <g transform="translate(640,250)">
+    <!-- Key head -->
+    <circle r="40" fill="#0F6E56" opacity="0.1" stroke="#0F6E56" stroke-width="2.5"/>
+    <circle r="30" fill="none" stroke="#1D9E75" stroke-width="2" opacity="0.5"/>
+    <circle r="15" fill="none" stroke="#5DCAA5" stroke-width="1.5" opacity="0.6"/>
+    <!-- Key shaft -->
+    <line x1="40" y1="0" x2="110" y2="0" stroke="#0F6E56" stroke-width="3" stroke-linecap="round"/>
+    <!-- Key teeth -->
+    <line x1="85" y1="0" x2="85" y2="15" stroke="#0F6E56" stroke-width="3" stroke-linecap="round"/>
+    <line x1="100" y1="0" x2="100" y2="12" stroke="#0F6E56" stroke-width="3" stroke-linecap="round"/>
+    <line x1="110" y1="0" x2="110" y2="18" stroke="#0F6E56" stroke-width="3" stroke-linecap="round"/>
+    <!-- Glow particles -->
+    <circle cx="-60" cy="-50" r="3" fill="#5DCAA5" opacity="0.4"/>
+    <circle cx="50" cy="-60" r="2.5" fill="#7F77DD" opacity="0.35"/>
+    <circle cx="-70" cy="30" r="2" fill="#1D9E75" opacity="0.4"/>
+    <circle cx="80" cy="40" r="3" fill="#5DCAA5" opacity="0.3"/>
+    <circle cx="-30" cy="-70" r="2" fill="#7F77DD" opacity="0.3"/>
+    <circle cx="120" cy="-30" r="2.5" fill="#1D9E75" opacity="0.35"/>
+  </g>
+  <!-- Decorative elements -->
+  <circle cx="200" cy="120" r="15" fill="#5DCAA5" opacity="0.12"/>
+  <circle cx="1050" cy="150" r="20" fill="#7F77DD" opacity="0.1"/>
+  <circle cx="180" cy="500" r="12" fill="#1D9E75" opacity="0.12"/>
+  <circle cx="1080" cy="480" r="18" fill="#5DCAA5" opacity="0.1"/>
+  <circle cx="350" cy="80" r="8" fill="#7F77DD" opacity="0.12"/>
+  <circle cx="950" cy="520" r="10" fill="#1D9E75" opacity="0.1"/>
+  <!-- Botanical elements -->
+  <g opacity="0.15" fill="#639922">
+    <ellipse cx="100" cy="550" rx="20" ry="8" transform="rotate(-20,100,550)"/>
+    <ellipse cx="115" cy="540" rx="18" ry="7" transform="rotate(10,115,540)"/>
+    <ellipse cx="1180" cy="560" rx="22" ry="8" transform="rotate(15,1180,560)"/>
+    <ellipse cx="1165" cy="548" rx="18" ry="7" transform="rotate(-15,1165,548)"/>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(cp -r D:/website/clavis-temp/* D:/website/clavis/)",
+      "Bash(cp D:/website/clavis-temp/.gitignore D:/website/clavis/)",
+      "Bash(rm -rf D:/website/clavis-temp)",
+      "Bash(npm install:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm run:*)"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1F5EE"/>
+      <stop offset="100%" stop-color="#EAF3DE"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Body silhouette with scan lines -->
+  <g transform="translate(400,185)">
+    <ellipse rx="70" ry="85" fill="#0F6E56" opacity="0.06"/>
+    <!-- Head -->
+    <circle cx="0" cy="-55" r="18" fill="none" stroke="#0F6E56" stroke-width="2.5"/>
+    <!-- Body -->
+    <line x1="0" y1="-37" x2="0" y2="20" stroke="#0F6E56" stroke-width="2.5"/>
+    <!-- Arms -->
+    <line x1="0" y1="-25" x2="-30" y2="5" stroke="#0F6E56" stroke-width="2.5"/>
+    <line x1="0" y1="-25" x2="30" y2="5" stroke="#0F6E56" stroke-width="2.5"/>
+    <!-- Legs -->
+    <line x1="0" y1="20" x2="-20" y2="55" stroke="#0F6E56" stroke-width="2.5"/>
+    <line x1="0" y1="20" x2="20" y2="55" stroke="#0F6E56" stroke-width="2.5"/>
+    <!-- Scan lines -->
+    <line x1="-45" y1="-40" x2="45" y2="-40" stroke="#5DCAA5" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+    <line x1="-45" y1="-10" x2="45" y2="-10" stroke="#5DCAA5" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+    <line x1="-45" y1="20" x2="45" y2="20" stroke="#5DCAA5" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+    <line x1="-45" y1="50" x2="45" y2="50" stroke="#5DCAA5" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+    <!-- Health indicators -->
+    <circle cx="40" cy="-45" r="5" fill="#639922" opacity="0.6"/>
+    <circle cx="42" cy="-5" r="5" fill="#5DCAA5" opacity="0.6"/>
+    <circle cx="38" cy="30" r="5" fill="#1D9E75" opacity="0.6"/>
+    <!-- Heart -->
+    <path d="M-5,-18 C-5,-22 -12,-22 -12,-18 C-12,-14 -5,-8 -5,-8 C-5,-8 2,-14 2,-18 C2,-22 -5,-22 -5,-18Z" fill="#1D9E75" opacity="0.5" transform="translate(0,2) scale(0.9)"/>
+  </g>
+  <text x="400" y="315" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="22" fill="#0F6E56" font-weight="bold">健康・ヘルスケア</text>
+  <text x="400" y="345" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="14" fill="#639922">からだの状態を知る</text>
+  <circle cx="100" cy="70" r="10" fill="#639922" opacity="0.15"/>
+  <circle cx="700" cy="90" r="8" fill="#5DCAA5" opacity="0.2"/>
+  <circle cx="130" cy="390" r="7" fill="#1D9E75" opacity="0.15"/>
+  <circle cx="670" cy="380" r="11" fill="#639922" opacity="0.12"/>
+</svg>

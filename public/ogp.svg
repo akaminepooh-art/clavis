@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1F5EE"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EEEDFE"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="6" fill="#0F6E56"/>
+  <!-- Key icon -->
+  <g transform="translate(600,220)" fill="none" stroke="#0F6E56" stroke-width="4" stroke-linecap="round">
+    <circle r="35"/>
+    <line x1="35" y1="0" x2="90" y2="0"/>
+    <line x1="70" y1="0" x2="70" y2="15"/>
+    <line x1="82" y1="0" x2="82" y2="12"/>
+    <line x1="90" y1="0" x2="90" y2="18"/>
+  </g>
+  <text x="600" y="340" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="64" fill="#0F6E56" font-weight="bold">CLAVIS</text>
+  <text x="600" y="400" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="28" fill="#666">人生の扉を開く鍵</text>
+  <text x="600" y="450" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="18" fill="#999">診断・占い・生活改善・農園体験</text>
+  <!-- Decorative -->
+  <circle cx="150" cy="100" r="12" fill="#5DCAA5" opacity="0.2"/>
+  <circle cx="1050" cy="120" r="16" fill="#7F77DD" opacity="0.15"/>
+  <circle cx="180" cy="530" r="10" fill="#1D9E75" opacity="0.15"/>
+  <circle cx="1020" cy="510" r="14" fill="#5DCAA5" opacity="0.15"/>
+</svg>

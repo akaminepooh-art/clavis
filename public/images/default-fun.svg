@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EEEDFE"/>
+      <stop offset="100%" stop-color="#E1F5EE"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#7F77DD" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#7F77DD" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="185" r="100" fill="url(#glow)"/>
+  <!-- Crystal ball -->
+  <g transform="translate(400,175)">
+    <circle r="50" fill="#7F77DD" opacity="0.08" stroke="#7F77DD" stroke-width="2"/>
+    <circle r="45" fill="none" stroke="#7F77DD" stroke-width="1" opacity="0.3"/>
+    <ellipse cx="0" cy="55" rx="30" ry="6" fill="#7F77DD" opacity="0.15"/>
+    <!-- Stars inside -->
+    <polygon points="0,-25 3,-18 10,-18 4,-13 6,-6 0,-10 -6,-6 -4,-13 -10,-18 -3,-18" fill="#7F77DD" opacity="0.5" transform="translate(-15,-5) scale(0.7)"/>
+    <polygon points="0,-25 3,-18 10,-18 4,-13 6,-6 0,-10 -6,-6 -4,-13 -10,-18 -3,-18" fill="#5DCAA5" opacity="0.5" transform="translate(18,5) scale(0.6)"/>
+    <polygon points="0,-25 3,-18 10,-18 4,-13 6,-6 0,-10 -6,-6 -4,-13 -10,-18 -3,-18" fill="#7F77DD" opacity="0.4" transform="translate(0,20) scale(0.5)"/>
+    <!-- Moon -->
+    <path d="M20,-30 A12,12 0 1,0 20,-6 A8,8 0 1,1 20,-30Z" fill="#7F77DD" opacity="0.35" transform="translate(-5,0)"/>
+    <!-- Sparkle highlight -->
+    <circle cx="-18" cy="-22" r="6" fill="white" opacity="0.25"/>
+  </g>
+  <!-- Floating stars -->
+  <polygon points="0,-8 2,-3 8,-3 3,1 5,7 0,3 -5,7 -3,1 -8,-3 -2,-3" fill="#7F77DD" opacity="0.25" transform="translate(180,90)"/>
+  <polygon points="0,-8 2,-3 8,-3 3,1 5,7 0,3 -5,7 -3,1 -8,-3 -2,-3" fill="#5DCAA5" opacity="0.2" transform="translate(620,110) scale(0.8)"/>
+  <polygon points="0,-8 2,-3 8,-3 3,1 5,7 0,3 -5,7 -3,1 -8,-3 -2,-3" fill="#7F77DD" opacity="0.2" transform="translate(250,350) scale(0.6)"/>
+  <polygon points="0,-8 2,-3 8,-3 3,1 5,7 0,3 -5,7 -3,1 -8,-3 -2,-3" fill="#5DCAA5" opacity="0.25" transform="translate(580,330) scale(0.7)"/>
+  <text x="400" y="310" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="22" fill="#7F77DD" font-weight="bold">娯楽・占い</text>
+  <text x="400" y="340" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif" font-size="14" fill="#7F77DD" opacity="0.7">運命のメッセージを受け取る</text>
+</svg>
