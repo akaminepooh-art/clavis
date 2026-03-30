@@ -310,7 +310,8 @@ export function TopPage() {
   const healthContents = contents.filter((c) => c.category === 'health').slice(0, 3)
   const petContents = contents.filter((c) => c.category === 'pet')
 
-  const { filtered: columnItems } = useColumns({ season, weather, limit: 2 })
+  const { filtered: columnPool } = useColumns({ season, weather })
+  const columnItems = shuffleSeed(columnPool, seed).slice(0, 2)
 
   const isPersonalized = interest.total() >= 3
   const topCat = interest.top() as ContentCategory
