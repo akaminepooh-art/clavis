@@ -6,6 +6,7 @@ import { useColumns } from '../hooks/useColumns'
 import { useWeather } from '../hooks/useWeather'
 import { SkeletonCard } from '../components/SkeletonCard'
 import { StatusBadge } from '../components/StatusBadge'
+import { ContentCard } from '../components/ContentCard'
 import { WeatherWidget } from '../components/WeatherWidget'
 import { CATEGORY_LABELS } from '../types'
 import type { ContentCategory, Content, Column } from '../types'
@@ -200,65 +201,7 @@ function FortuneInlineWidget({ seed }: { seed: number }) {
 
 // ──────────────────────────────────────
 // Large content card
-// ──────────────────────────────────────
-function CardLg({ content }: { content: Content }) {
-  const CAT_BG: Record<ContentCategory, string> = { self: '#E1F5EE', health: '#E6F1FB', fun: '#EEEDFE', pet: '#FAEEDA' }
-  const ICONS: Record<ContentCategory, string> = { self: '🧠', health: '🏃', fun: '🔮', pet: '🐾' }
-  const isClickable = content.status === 'live' && content.url
 
-  const TAG_CLS: Record<ContentCategory, string> = {
-    self: 'bg-pk-primary-light text-pk-primary',
-    health: 'bg-blue-50 text-blue-800',
-    fun: 'bg-pk-lavender text-pk-lavender-mid',
-    pet: 'bg-amber-50 text-amber-700',
-  }
-
-  const card = (
-    <div className={`border border-gray-200 rounded-xl overflow-hidden bg-white ${isClickable ? 'cursor-pointer hover:border-gray-300' : ''}`}>
-      <div className="h-16 flex items-center justify-center text-3xl" style={{ background: CAT_BG[content.category] }}>
-        {ICONS[content.category]}
-      </div>
-      <div className="px-2.5 pt-2 pb-2.5">
-        <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full ${TAG_CLS[content.category]}`}>診断</span>
-        <p className="text-xs font-semibold text-gray-800 mt-1 mb-0.5">{content.title}</p>
-        <p className="text-xs text-gray-500 leading-snug line-clamp-2">{content.description}</p>
-        <div className="mt-1.5">
-          <StatusBadge status={content.status} />
-        </div>
-      </div>
-    </div>
-  )
-  if (!isClickable || !content.url) return card
-  if (content.type === 'external') return <a href={content.url} target="_blank" rel="noopener noreferrer" className="no-underline">{card}</a>
-  return <Link to={content.url} className="no-underline">{card}</Link>
-}
-
-// ──────────────────────────────────────
-// Small content card
-// ──────────────────────────────────────
-function CardSm({ content }: { content: Content }) {
-  const TAG_CLS: Record<ContentCategory, string> = {
-    self: 'bg-pk-primary-light text-pk-primary',
-    health: 'bg-blue-50 text-blue-800',
-    fun: 'bg-pk-lavender text-pk-lavender-mid',
-    pet: 'bg-amber-50 text-amber-700',
-  }
-  const isClickable = content.status === 'live' && content.url
-  const card = (
-    <div className={`border border-gray-200 rounded-xl p-2.5 bg-white flex flex-col justify-between min-h-20 ${isClickable ? 'cursor-pointer hover:border-gray-300' : ''}`}>
-      <div className="flex items-start justify-between gap-1 mb-1.5">
-        <p className="text-xs font-semibold text-gray-800 leading-tight">{content.title}</p>
-        <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full shrink-0 ${TAG_CLS[content.category]}`}>
-          {content.category === 'fun' ? '占い' : '診断'}
-        </span>
-      </div>
-      <StatusBadge status={content.status} />
-    </div>
-  )
-  if (!isClickable || !content.url) return card
-  if (content.type === 'external') return <a href={content.url} target="_blank" rel="noopener noreferrer" className="no-underline">{card}</a>
-  return <Link to={content.url} className="no-underline">{card}</Link>
-}
 
 // ──────────────────────────────────────
 // Health list item
@@ -465,8 +408,8 @@ export function TopPage() {
             ) : visibleContents.length === 0 ? (
               <p className="text-xs text-gray-400 text-center py-8">コンテンツを準備中です</p>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {visibleContents.map((c) => <CardLg key={c.id} content={c} />)}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {visibleContents.map((c) => <ContentCard key={c.id} content={c} />)}
               </div>
             )}
           </section>
@@ -500,11 +443,11 @@ export function TopPage() {
             {isPersonalized && !loading && (
               <section>
                 <SecHeader title="あなたへのおすすめ" color={CAT_STYLE[topCat]?.bar ?? '#0F6E56'} />
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                   {contents
                     .filter((c) => c.category === topCat && c.status === 'live')
                     .slice(0, 4)
-                    .map((c) => <CardLg key={c.id} content={c} />)}
+                    .map((c) => <ContentCard key={c.id} content={c} />)}
                 </div>
               </section>
             )}
@@ -513,14 +456,9 @@ export function TopPage() {
             {!loading && selfContents.length > 0 && (
               <section>
                 <SecHeader title="自己理解・診断" color="#0F6E56" count={selfContents.length} linkTo="/category/self" />
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  {selfContents.slice(0, 2).map((c) => <CardLg key={c.id} content={c} />)}
+                <div className="grid grid-cols-2 gap-3">
+                  {selfContents.slice(0, 4).map((c) => <ContentCard key={c.id} content={c} />)}
                 </div>
-                {selfContents.length > 2 && (
-                  <div className="grid grid-cols-3 gap-2">
-                    {selfContents.slice(2, 5).map((c) => <CardSm key={c.id} content={c} />)}
-                  </div>
-                )}
               </section>
             )}
 
@@ -548,8 +486,8 @@ export function TopPage() {
             {!loading && petContents.length > 0 && (
               <section>
                 <SecHeader title="ペットケア" color="#BA7517" count={counts.pet} linkTo="/category/pet" />
-                <div className="grid grid-cols-2 gap-2">
-                  {petContents.map((c) => <CardLg key={c.id} content={c} />)}
+                <div className="grid grid-cols-2 gap-3">
+                  {petContents.map((c) => <ContentCard key={c.id} content={c} />)}
                 </div>
               </section>
             )}
@@ -558,9 +496,9 @@ export function TopPage() {
             {!loading && (
               <section>
                 <SecHeader title="娯楽・占い" color="#7F77DD" count={counts.fun} linkTo="/category/fun" />
-                <div className="grid grid-cols-3 gap-2">
-                  {contents.filter((c) => c.category === 'fun' && c.status === 'live').slice(0, 3).map((c) => (
-                    <CardSm key={c.id} content={c} />
+                <div className="grid grid-cols-2 gap-3">
+                  {contents.filter((c) => c.category === 'fun' && c.status === 'live').slice(0, 4).map((c) => (
+                    <ContentCard key={c.id} content={c} />
                   ))}
                 </div>
                 <p className="text-xs text-gray-400 mt-2">
