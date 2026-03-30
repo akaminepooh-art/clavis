@@ -5,7 +5,7 @@
 **サービス名**: CLAVIS（クラビス）
 **URL**: https://clavis.netlify.app/
 **コンセプト**: 「人生の扉を開く鍵」— 診断・占い・生活改善・農園体験を束ねる一般向けライフナビゲーション
-**姉妹サイト**: FACTUM（https://factum.netlify.app/）← データ分析・投資系
+**姉妹サイト**: APERIS（https://aperis.netlify.app/）← データ分析・投資系
 
 ---
 
@@ -408,10 +408,10 @@ Warm flat illustration, sunny Japanese strawberry farm, rows of red strawberries
 
 ---
 
-## 姉妹サイト FACTUM との連携
+## 姉妹サイト APERIS との連携
 
-- ヘッダー/フッターに `https://factum.netlify.app` へのリンク常時表示
-- 「データ分析・投資分析はFACTUMへ →」誘導バナー
+- ヘッダー/フッターに `https://aperis.netlify.app` へのリンク常時表示
+- 「データ分析・投資分析はAPERISへ →」誘導バナー
 
 ---
 
@@ -421,7 +421,7 @@ Warm flat illustration, sunny Japanese strawberry farm, rows of red strawberries
 2. **免責表示は削除・省略しない** — `disclaimer_required: true` には必ず表示
 3. **モバイルファースト** — `grid-cols-1` から始めてメディアクエリで拡張
 4. **ステータスバッジを目立たせる** — 進捗把握が最優先
-5. **FACTUM へのリンクを常に表示**
+5. **APERIS へのリンクを常に表示**
 6. **農園誘導は自然に** — 文脈で引く・押しつけない
 7. **サムネイルは `thumbnail_url` 直指定** — JSON編集のみで更新
 8. **外部サービスを増やさない** — Phase 1はフロントのみで動くこと

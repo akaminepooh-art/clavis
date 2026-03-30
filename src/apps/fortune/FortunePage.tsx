@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { generateFortune, type FortuneResult } from './logic'
 import { DisclaimerBanner } from '../../components/DisclaimerBanner'
-import { FarmBanner } from '../../components/FarmBanner'
 import { generateShareImage } from '../../utils/shareImage'
 import { ShareButtons } from '../../components/ShareButtons'
 import { saveHistory } from '../../utils/storage'
+import { interest } from '../../utils/interest'
 
 function ScoreBar({ label, value }: { label: string; value: number }) {
   return (
@@ -13,21 +13,21 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
       <span className="text-sm text-gray-600 w-12 shrink-0">{label}</span>
       <div className="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-cl-primary to-cl-primary-mid rounded-full transition-all duration-700"
+          className="h-full bg-gradient-to-r from-pk-primary to-pk-primary-mid rounded-full transition-all duration-700"
           style={{ width: `${value}%` }}
         />
       </div>
-      <span className="text-sm font-bold text-cl-primary w-10 text-right">{value}</span>
+      <span className="text-sm font-bold text-pk-primary w-10 text-right">{value}</span>
     </div>
   )
 }
 
 export function FortunePage() {
   const [birthdate, setBirthdate] = useState(() => {
-    return localStorage.getItem('fortune_birthdate') ?? ''
+    return localStorage.getItem('pk_fortune_birthdate') ?? ''
   })
   const [result, setResult] = useState<FortuneResult | null>(() => {
-    const saved = localStorage.getItem('fortune_last')
+    const saved = localStorage.getItem('pk_fortune_last')
     if (!saved) return null
     try {
       const parsed = JSON.parse(saved)
@@ -42,16 +42,17 @@ export function FortunePage() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!birthdate) return
-    localStorage.setItem('fortune_birthdate', birthdate)
+    localStorage.setItem('pk_fortune_birthdate', birthdate)
     const fortune = generateFortune(birthdate, today)
     setResult(fortune)
-    localStorage.setItem('fortune_last', JSON.stringify({ date: today, result: fortune }))
+    localStorage.setItem('pk_fortune_last', JSON.stringify({ date: today, result: fortune }))
     saveHistory({
       id: `fortune-${today}-${birthdate}`,
       appId: 'fortune',
       date: today,
       result: fortune,
     })
+    interest.add('fun', 5)
   }
 
   async function handleImageDownload() {
@@ -69,14 +70,14 @@ export function FortunePage() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `clavis-fortune-${today}.png`
+    a.download = `portakey-fortune-${today}.png`
     a.click()
     URL.revokeObjectURL(url)
   }
 
   return (
     <div className="max-w-xl mx-auto px-4 py-8">
-      <Link to="/" className="text-sm text-gray-500 hover:text-cl-primary no-underline mb-4 inline-block">
+      <Link to="/" className="text-sm text-gray-500 hover:text-pk-primary no-underline mb-4 inline-block">
         &larr; トップへ戻る
       </Link>
 
@@ -99,13 +100,13 @@ export function FortunePage() {
               type="date"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-cl-primary-border focus:border-cl-primary"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-pk-primary-border focus:border-pk-primary"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-cl-primary text-white rounded-xl py-3 font-bold text-base hover:bg-cl-primary-mid transition-colors"
+            className="w-full bg-pk-primary text-white rounded-xl py-3 font-bold text-base hover:bg-pk-primary-mid transition-colors"
           >
             占う
           </button>
@@ -116,7 +117,7 @@ export function FortunePage() {
             {/* Overall */}
             <div className="text-center">
               <p className="text-sm text-gray-500 mb-1">総合運勢</p>
-              <div className="text-5xl font-bold text-cl-primary">{result.overall}</div>
+              <div className="text-5xl font-bold text-pk-primary">{result.overall}</div>
               <p className="text-sm text-gray-400 mt-1">/ 100</p>
             </div>
 
@@ -130,17 +131,17 @@ export function FortunePage() {
 
             {/* Lucky items */}
             <div className="grid grid-cols-3 gap-3">
-              <div className="bg-cl-primary-light rounded-xl p-3 text-center">
+              <div className="bg-pk-primary-light rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-500 mb-1">ラッキーカラー</p>
-                <p className="font-bold text-cl-primary">{result.lucky.color}</p>
+                <p className="font-bold text-pk-primary">{result.lucky.color}</p>
               </div>
-              <div className="bg-cl-primary-light rounded-xl p-3 text-center">
+              <div className="bg-pk-primary-light rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-500 mb-1">ラッキーフード</p>
-                <p className="font-bold text-cl-primary">{result.lucky.food}</p>
+                <p className="font-bold text-pk-primary">{result.lucky.food}</p>
               </div>
-              <div className="bg-cl-primary-light rounded-xl p-3 text-center">
+              <div className="bg-pk-primary-light rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-500 mb-1">ラッキーナンバー</p>
-                <p className="font-bold text-cl-primary">{result.lucky.number}</p>
+                <p className="font-bold text-pk-primary">{result.lucky.number}</p>
               </div>
             </div>
 
@@ -149,15 +150,13 @@ export function FortunePage() {
               <p className="text-gray-700">{result.message}</p>
             </div>
 
+
             {/* Share buttons */}
             <ShareButtons
-              text={`今日の運勢は${result.overall}点！ #CLAVIS`}
-              url="https://clavis.netlify.app/apps/fortune"
+              text={`今日の運勢は${result.overall}点！ #PORTAKEY`}
+              url="https://portakey.netlify.app/apps/fortune"
               onImageDownload={handleImageDownload}
             />
-
-            {/* Farm banner */}
-            {result.showFarmBanner && <FarmBanner highlight />}
           </div>
         )}
       </div>

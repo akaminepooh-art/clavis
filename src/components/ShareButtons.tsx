@@ -6,7 +6,7 @@ type ShareButtonsProps = {
   onImageDownload?: () => void
 }
 
-export function ShareButtons({ text, url = 'https://clavis.netlify.app', onImageDownload }: ShareButtonsProps) {
+export function ShareButtons({ text, url = 'https://portakey.netlify.app', onImageDownload }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
 
   const encodedText = encodeURIComponent(text)
@@ -76,7 +76,7 @@ export function ShareButtons({ text, url = 'https://clavis.netlify.app', onImage
         {onImageDownload && (
           <button
             onClick={onImageDownload}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-cl-primary-light text-cl-primary text-sm font-bold hover:bg-cl-primary-light/80 transition-colors border border-cl-primary-border"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-pk-primary-light text-pk-primary text-sm font-bold hover:bg-pk-primary-light/80 transition-colors border border-pk-primary-border"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />

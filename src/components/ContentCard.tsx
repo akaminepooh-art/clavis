@@ -42,7 +42,7 @@ export function ContentCard({ content }: { content: Content }) {
             {content.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded-full bg-cl-primary-light text-cl-primary"
+                className="text-xs px-2 py-0.5 rounded-full bg-pk-primary-light text-pk-primary"
               >
                 {tag}
               </span>

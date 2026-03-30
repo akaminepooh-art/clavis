@@ -1,4 +1,4 @@
-const DB_NAME = 'clavis'
+const DB_NAME = 'portakey'
 const DB_VERSION = 1
 const STORE_NAME = 'history'
 
@@ -34,7 +34,7 @@ export async function saveHistory(entry: HistoryEntry): Promise<void> {
     })
   } catch (err) {
     console.error('IndexedDB save failed, falling back to localStorage:', err)
-    const key = `history_${entry.appId}_${entry.date}`
+    const key = `pk_history_${entry.appId}_${entry.date}`
     localStorage.setItem(key, JSON.stringify(entry))
   }
 }

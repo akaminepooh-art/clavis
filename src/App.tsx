@@ -6,6 +6,7 @@ import { CategoryPage } from './pages/CategoryPage'
 import { ContentPage } from './pages/ContentPage'
 import { FortunePage } from './apps/fortune/FortunePage'
 import { HistoryPage } from './pages/HistoryPage'
+import { SearchPage } from './pages/SearchPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/content/:contentId" element={<ContentPage />} />
           <Route path="/apps/fortune" element={<FortunePage />} />
           <Route path="/history" element={<HistoryPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </main>
       <Footer />

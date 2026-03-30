@@ -3,8 +3,10 @@ import { useContents } from '../hooks/useContents'
 import { ContentCard } from '../components/ContentCard'
 import { SkeletonCard } from '../components/SkeletonCard'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
-import { CATEGORY_LABELS } from '../types'
+import { CATEGORY_LABELS, CATEGORY_ICONS } from '../types'
 import type { ContentCategory } from '../types'
+import { interest } from '../utils/interest'
+import { useEffect } from 'react'
 
 export function CategoryPage() {
   const { categoryId } = useParams<{ categoryId: string }>()
@@ -12,14 +14,21 @@ export function CategoryPage() {
 
   const category = categoryId as ContentCategory
   const label = CATEGORY_LABELS[category]
+  const icon = CATEGORY_ICONS[category]
   const filtered = contents.filter((c) => c.category === category)
   const showDisclaimer = category === 'fun'
+
+  useEffect(() => {
+    if (category && CATEGORY_LABELS[category]) {
+      interest.add(category as 'self' | 'health' | 'fun', 1)
+    }
+  }, [category])
 
   if (!label) {
     return (
       <div className="max-w-5xl mx-auto px-4 py-16 text-center">
         <p className="text-gray-500">カテゴリが見つかりません</p>
-        <Link to="/" className="text-cl-primary hover:underline mt-4 inline-block">
+        <Link to="/" className="text-pk-primary hover:underline mt-4 inline-block">
           トップへ戻る
         </Link>
       </div>
@@ -28,10 +37,12 @@ export function CategoryPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <Link to="/" className="text-sm text-gray-500 hover:text-cl-primary no-underline mb-4 inline-block">
+      <Link to="/" className="text-sm text-gray-500 hover:text-pk-primary no-underline mb-4 inline-block">
         &larr; トップへ戻る
       </Link>
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">{label}</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        {icon} {label}
+      </h1>
 
       {showDisclaimer && (
         <div className="mb-4">

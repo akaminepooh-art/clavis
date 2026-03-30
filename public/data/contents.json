@@ -11,7 +11,7 @@
     "disclaimer_required": true,
     "sort_order": 1,
     "is_featured": true,
-    "tags": ["四柱推命", "星", "占い"]
+    "tags": ["四柱推命", "星", "占い", "つむぎ"]
   },
   {
     "id": "kaze-tsumugi",
@@ -25,7 +25,7 @@
     "disclaimer_required": true,
     "sort_order": 2,
     "is_featured": true,
-    "tags": ["方位", "風水", "占い"]
+    "tags": ["方位", "風水", "占い", "つむぎ"]
   },
   {
     "id": "mei-tsumugi",
@@ -39,7 +39,7 @@
     "disclaimer_required": true,
     "sort_order": 3,
     "is_featured": true,
-    "tags": ["姓名判断", "占い"]
+    "tags": ["姓名判断", "占い", "つむぎ"]
   },
   {
     "id": "en-tsumugi",
@@ -53,7 +53,7 @@
     "disclaimer_required": true,
     "sort_order": 4,
     "is_featured": false,
-    "tags": ["相性", "占い"]
+    "tags": ["相性", "占い", "つむぎ"]
   },
   {
     "id": "yume-tsumugi",
@@ -67,7 +67,7 @@
     "disclaimer_required": true,
     "sort_order": 5,
     "is_featured": false,
-    "tags": ["夢占い", "占い"]
+    "tags": ["夢占い", "占い", "つむぎ"]
   },
   {
     "id": "fortune-today",
@@ -96,6 +96,20 @@
     "sort_order": 7,
     "is_featured": false,
     "tags": ["ロト", "統計", "娯楽"]
+  },
+  {
+    "id": "farm-tactics-rpg",
+    "title": "農園タクティクスRPG",
+    "category": "fun",
+    "type": "webapp",
+    "status": "dev",
+    "url": null,
+    "thumbnail_url": null,
+    "description": "大分の農園を舞台にしたシミュレーションゲーム",
+    "disclaimer_required": false,
+    "sort_order": 8,
+    "is_featured": false,
+    "tags": ["ゲーム", "RPG"]
   },
   {
     "id": "inniq",
@@ -193,7 +207,7 @@
     "disclaimer_required": false,
     "sort_order": 20,
     "is_featured": false,
-    "tags": ["診断", "姿勢", "スポーツ"]
+    "tags": ["診断", "姿勢", "体幹"]
   },
   {
     "id": "akira-body-check",
@@ -207,7 +221,7 @@
     "disclaimer_required": false,
     "sort_order": 21,
     "is_featured": false,
-    "tags": ["診断", "体幹", "スポーツ"]
+    "tags": ["診断", "体幹"]
   },
   {
     "id": "beauty-type",
@@ -240,29 +254,29 @@
   {
     "id": "farm-experience",
     "title": "農園体験予約案内",
-    "category": "farm",
+    "category": "health",
     "type": "external",
     "status": "planned",
     "url": null,
     "thumbnail_url": null,
-    "description": "あっきらきら農園で旬のフルーツを楽しもう",
+    "description": "大分の農園で旬のフルーツを体験しよう",
     "disclaimer_required": false,
-    "sort_order": 40,
+    "sort_order": 31,
     "is_featured": false,
-    "tags": ["農園", "体験", "フルーツ"]
+    "tags": ["農園", "体験", "アウトドア"]
   },
   {
-    "id": "farm-tactics-rpg",
-    "title": "農園タクティクスRPG",
-    "category": "farm",
-    "type": "webapp",
-    "status": "dev",
-    "url": null,
+    "id": "koepal",
+    "title": "KoePal",
+    "category": "pet",
+    "type": "external",
+    "status": "live",
+    "url": "https://koepal.netlify.app/",
     "thumbnail_url": null,
-    "description": "農園を育てるシミュレーションゲーム",
+    "description": "ペットの声・行動を記録・分析するAIアプリ",
     "disclaimer_required": false,
-    "sort_order": 41,
-    "is_featured": false,
-    "tags": ["ゲーム", "農園", "RPG"]
+    "sort_order": 40,
+    "is_featured": true,
+    "tags": ["ペット", "AI", "コミュニケーション"]
   }
 ]

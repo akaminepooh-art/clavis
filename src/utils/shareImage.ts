@@ -6,13 +6,13 @@ export type ShareImageParams = {
 }
 
 export async function generateShareImage(params: ShareImageParams): Promise<Blob> {
-  const { title, scores, message, siteUrl = 'clavis.netlify.app' } = params
+  const { title, scores, message, siteUrl = 'portakey.netlify.app' } = params
   const canvas = document.createElement('canvas')
   canvas.width = 1200
   canvas.height = 630
   const ctx = canvas.getContext('2d')!
 
-  // Background gradient (teal → white)
+  // Background gradient (teal → white → lavender)
   const grad = ctx.createLinearGradient(0, 0, 1200, 630)
   grad.addColorStop(0, '#E1F5EE')
   grad.addColorStop(0.5, '#FFFFFF')
@@ -24,10 +24,10 @@ export async function generateShareImage(params: ShareImageParams): Promise<Blob
   ctx.fillStyle = '#0F6E56'
   ctx.fillRect(0, 0, 1200, 6)
 
-  // CLAVIS logo text (top left)
+  // PORTAKEY logo text (top left)
   ctx.font = 'bold 28px "Hiragino Sans", "Noto Sans JP", sans-serif'
   ctx.fillStyle = '#0F6E56'
-  ctx.fillText('🔑 CLAVIS', 50, 55)
+  ctx.fillText('🔑 PORTAKEY', 50, 55)
 
   // Title
   ctx.font = 'bold 42px "Hiragino Sans", "Noto Sans JP", sans-serif'
@@ -104,7 +104,7 @@ export async function shareResult(params: ShareImageParams & { shareText: string
 
   try {
     const blob = await generateShareImage(imageParams)
-    const file = new File([blob], 'clavis-result.png', { type: 'image/png' })
+    const file = new File([blob], 'portakey-result.png', { type: 'image/png' })
 
     if (navigator.canShare?.({ files: [file] })) {
       await navigator.share({
@@ -122,7 +122,7 @@ export async function shareResult(params: ShareImageParams & { shareText: string
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'clavis-result.png'
+  a.download = 'portakey-result.png'
   a.click()
   URL.revokeObjectURL(url)
 }

@@ -1,0 +1,26 @@
+{
+  "name": "PORTAKEY",
+  "short_name": "PORTAKEY",
+  "description": "人生の扉を開く鍵 — 診断・占い・健康・ペットケアを束ねるライフナビゲーション",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0F6E56",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "health", "entertainment"],
+  "lang": "ja"
+}
