@@ -11,15 +11,19 @@ export function Footer() {
   return (
     <footer className="mt-auto bg-gray-50 border-t border-gray-200">
       <div className="max-w-5xl mx-auto px-4 py-8 text-center text-sm text-gray-500 space-y-3">
-        <div className="flex justify-center gap-6 flex-wrap">
-          <a
-            href="https://aperis.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pk-primary hover:underline"
-          >
-            データ分析・投資分析はAPERISへ &rarr;
-          </a>
+        {/* 関連サービス */}
+        <div>
+          <p className="text-xs text-gray-400 mb-1.5 font-semibold tracking-wide">関連サービス</p>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <a
+              href="https://aperis.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-gray-500 hover:text-pk-primary transition-colors"
+            >
+              APERIS（データ・投資分析）→
+            </a>
+          </div>
         </div>
 
         <p className="text-xs text-gray-400">

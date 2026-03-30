@@ -124,10 +124,30 @@ function PickCard({ content }: { content: Content }) {
   const ICONS: Record<ContentCategory, string> = { self: '🧠', health: '🏃', fun: '🔮', pet: '🐾' }
   const isClickable = content.status === 'live' && content.url
   const card = (
-    <div className="bg-white/80 rounded-lg p-2 cursor-pointer hover:bg-white transition-colors">
-      <div className="text-base mb-1">{ICONS[content.category]}</div>
-      <p className="text-xs font-semibold text-gray-800 leading-tight mb-0.5 line-clamp-1">{content.title}</p>
-      <p className="text-xs text-gray-400">{CATEGORY_LABELS[content.category]}</p>
+    <div className="bg-white/80 rounded-lg overflow-hidden cursor-pointer hover:bg-white transition-colors">
+      {/* Thumbnail or fallback emoji */}
+      {content.thumbnail_url ? (
+        <div className="h-14 overflow-hidden">
+          <img
+            src={content.thumbnail_url}
+            alt={content.title}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              const img = e.currentTarget
+              img.style.display = 'none'
+              const fallback = img.nextElementSibling as HTMLElement | null
+              if (fallback) fallback.style.display = 'flex'
+            }}
+          />
+          <div className="h-14 items-center justify-center text-2xl bg-white/60 hidden">{ICONS[content.category]}</div>
+        </div>
+      ) : (
+        <div className="h-14 flex items-center justify-center text-2xl bg-white/60">{ICONS[content.category]}</div>
+      )}
+      <div className="p-1.5">
+        <p className="text-xs font-semibold text-gray-800 leading-tight mb-0.5 line-clamp-2">{content.title}</p>
+        <p className="text-xs text-gray-400">{CATEGORY_LABELS[content.category]}</p>
+      </div>
     </div>
   )
   if (!isClickable || !content.url) return card

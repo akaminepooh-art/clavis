@@ -43,19 +43,11 @@ export function Header() {
           </div>
         </form>
 
-        {/* Right: APERIS link + mobile search */}
+        {/* Right: mobile search icon */}
         <div className="flex items-center gap-2 shrink-0">
           <Link to="/search" className="sm:hidden text-gray-500 hover:text-pk-primary no-underline text-xs">
             🔍
           </Link>
-          <a
-            href="https://aperis.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs px-2.5 py-1 rounded-md border border-pk-primary-border text-pk-primary hover:bg-pk-primary-light no-underline transition-colors whitespace-nowrap"
-          >
-            分析サイト →
-          </a>
         </div>
       </div>
     </header>
