@@ -84,18 +84,32 @@
     "tags": ["占い", "運勢"]
   },
   {
-    "id": "loto-stats",
-    "title": "ロト統計データ",
+    "id": "loto-analyzer",
+    "title": "ロトアナライザー",
     "category": "fun",
-    "type": "instant",
-    "status": "planned",
-    "url": null,
-    "thumbnail_url": null,
-    "description": "過去の当選番号から傾向を分析（娯楽）",
+    "type": "external",
+    "status": "live",
+    "url": "https://loto-analyzer.netlify.app/",
+    "thumbnail_url": "https://loto-analyzer.netlify.app/ogp.png",
+    "description": "ミニロト・ロト6・ロト7の解析・予想",
     "disclaimer_required": true,
     "sort_order": 7,
     "is_featured": false,
-    "tags": ["ロト", "統計", "娯楽"]
+    "tags": ["ロト", "統計", "解析", "娯楽"]
+  },
+  {
+    "id": "numbers-analyzer",
+    "title": "ナンバーズアナライザー",
+    "category": "fun",
+    "type": "external",
+    "status": "live",
+    "url": "https://numbers-analyzer.netlify.app/",
+    "thumbnail_url": "https://numbers-analyzer.netlify.app/ogp.png",
+    "description": "ナンバーズ3・4の統計解析・予想",
+    "disclaimer_required": true,
+    "sort_order": 8,
+    "is_featured": false,
+    "tags": ["ナンバーズ", "統計", "解析", "娯楽"]
   },
   {
     "id": "farm-tactics-rpg",

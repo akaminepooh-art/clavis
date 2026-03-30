@@ -45,7 +45,6 @@ const COMING_SOON = [
   { emoji: '⚡', label: '決断力診断' },
   { emoji: '💤', label: '睡眠タイプ診断' },
   { emoji: '🏆', label: '強み発見テスト' },
-  { emoji: '🍀', label: 'ロト統計' },
   { emoji: '🚨', label: '防災チェック' },
   { emoji: '🧍', label: 'BERRYBODY姿勢分析' },
 ]
