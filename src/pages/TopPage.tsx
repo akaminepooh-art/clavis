@@ -8,7 +8,7 @@ import { SkeletonCard } from '../components/SkeletonCard'
 import { StatusBadge } from '../components/StatusBadge'
 import { ContentCard } from '../components/ContentCard'
 import { WeatherWidget } from '../components/WeatherWidget'
-import { CATEGORY_LABELS } from '../types'
+import { CATEGORY_LABELS, COLUMN_DEFAULTS } from '../types'
 import type { ContentCategory, Content, Column } from '../types'
 import { getHeroCopy, WEEKLY_FEATURES } from '../data/heroCopies'
 import { hashDate, shuffleSeed, weekNumber } from '../utils/seed'
@@ -283,21 +283,26 @@ function ArticleCard({ column }: { column: Column }) {
   }
   const info = CAT_INFO[column.category] ?? CAT_INFO.health
 
+  const imgSrc = COLUMN_DEFAULTS[column.category] ?? COLUMN_DEFAULTS.health
+
   return (
     <div className="border border-gray-200 rounded-xl overflow-hidden cursor-pointer hover:border-gray-300 transition-colors">
-      <div className="h-20 flex items-center justify-center text-3xl relative" style={{ background: info.bg }}>
-        {info.emoji}
+      <div className="h-20 relative overflow-hidden">
+        <img
+          src={imgSrc}
+          alt={info.label}
+          className="w-full h-full object-cover"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).src = COLUMN_DEFAULTS.health }}
+        />
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.18)' }} />
         <span
           className="absolute top-2 left-2 text-xs font-semibold px-2 py-0.5 rounded-full"
-          style={{ background: 'rgba(255,255,255,0.9)', color: info.tagColor }}
+          style={{ background: 'rgba(255,255,255,0.92)', color: info.tagColor }}
         >
-          {info.label}
+          {info.emoji} {info.label}
         </span>
       </div>
       <div className="px-3 py-2.5">
-        <p className="text-xs text-gray-400 mb-1 uppercase tracking-wide">
-          {info.label}
-        </p>
         <p className="text-xs font-bold text-gray-800 mb-1 leading-snug">{column.title}</p>
         <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{column.desc}</p>
       </div>

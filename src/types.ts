@@ -41,6 +41,14 @@ export const CATEGORY_DEFAULTS: Record<ContentCategory, string> = {
   pet: '/default-pet.jpg',
 }
 
+export const COLUMN_DEFAULTS: Record<string, string> = {
+  health:   '/default-health.jpg',
+  self:     '/default-self.jpg',
+  nature:   '/default-nature.jpg',
+  science:  '/default-science.jpg',
+  seasonal: '/default-seasonal.jpg',
+}
+
 export type Column = {
   id: string
   category: 'health' | 'self' | 'nature' | 'science' | 'seasonal'
