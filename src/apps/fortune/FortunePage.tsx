@@ -24,9 +24,18 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
 }
 
 export function FortunePage() {
-  const [birthdate, setBirthdate] = useState(() => {
-    return localStorage.getItem('pk_fortune_birthdate') ?? ''
-  })
+  const savedBirthdate = localStorage.getItem('pk_fortune_birthdate') ?? ''
+  const [bdYear,  setBdYear]  = useState(() => savedBirthdate ? savedBirthdate.split('-')[0] : '')
+  const [bdMonth, setBdMonth] = useState(() => savedBirthdate ? savedBirthdate.split('-')[1] : '')
+  const [bdDay,   setBdDay]   = useState(() => savedBirthdate ? savedBirthdate.split('-')[2] : '')
+
+  const birthdate = bdYear && bdMonth && bdDay ? `${bdYear}-${bdMonth}-${bdDay}` : ''
+
+  // 選択中の年月の日数を動的に計算
+  const daysInMonth = bdYear && bdMonth
+    ? new Date(Number(bdYear), Number(bdMonth), 0).getDate()
+    : 31
+
   const [result, setResult] = useState<FortuneResult | null>(() => {
     const saved = localStorage.getItem('pk_fortune_last')
     if (!saved) return null
@@ -39,6 +48,7 @@ export function FortunePage() {
   })
 
   const today = new Date().toISOString().split('T')[0]
+  const currentYear = new Date().getFullYear()
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -98,21 +108,61 @@ export function FortunePage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="birthdate" className="block text-sm font-bold text-gray-700 mb-1">
+            <label className="block text-sm font-bold text-gray-700 mb-2">
               生年月日
             </label>
-            <input
-              id="birthdate"
-              type="date"
-              value={birthdate}
-              onChange={(e) => setBirthdate(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-pk-primary-border focus:border-pk-primary"
-              required
-            />
+            <div className="grid grid-cols-3 gap-2">
+              {/* 年 */}
+              <div className="relative">
+                <select
+                  value={bdYear}
+                  onChange={(e) => { setBdYear(e.target.value); setBdDay('') }}
+                  className="w-full appearance-none border border-gray-300 rounded-xl px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-pk-primary-border focus:border-pk-primary bg-white pr-8"
+                  required
+                >
+                  <option value="">年</option>
+                  {Array.from({ length: currentYear - 1919 }, (_, i) => currentYear - i).map((y) => (
+                    <option key={y} value={String(y)}>{y}年</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▼</span>
+              </div>
+              {/* 月 */}
+              <div className="relative">
+                <select
+                  value={bdMonth}
+                  onChange={(e) => { setBdMonth(e.target.value); setBdDay('') }}
+                  className="w-full appearance-none border border-gray-300 rounded-xl px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-pk-primary-border focus:border-pk-primary bg-white pr-8"
+                  required
+                >
+                  <option value="">月</option>
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                    <option key={m} value={String(m).padStart(2, '0')}>{m}月</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▼</span>
+              </div>
+              {/* 日 */}
+              <div className="relative">
+                <select
+                  value={bdDay}
+                  onChange={(e) => setBdDay(e.target.value)}
+                  className="w-full appearance-none border border-gray-300 rounded-xl px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-pk-primary-border focus:border-pk-primary bg-white pr-8"
+                  required
+                >
+                  <option value="">日</option>
+                  {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((d) => (
+                    <option key={d} value={String(d).padStart(2, '0')}>{d}日</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▼</span>
+              </div>
+            </div>
           </div>
           <button
             type="submit"
-            className="w-full bg-pk-primary text-white rounded-xl py-3 font-bold text-base hover:bg-pk-primary-mid transition-colors"
+            disabled={!birthdate}
+            className="w-full bg-pk-primary text-white rounded-xl py-3 font-bold text-base hover:bg-pk-primary-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             占う
           </button>
