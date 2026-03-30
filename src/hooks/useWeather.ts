@@ -26,6 +26,10 @@ export type WeatherResult = {
   precipPct: number | null
   /** 気象庁の天気テキスト e.g. "晴れ" */
   weatherText: string | null
+  /** 最高気温 */
+  tempHi: number | null
+  /** 最低気温 */
+  tempLo: number | null
 }
 
 export function useWeather(): WeatherResult {
@@ -36,6 +40,8 @@ export function useWeather(): WeatherResult {
   const [loading, setLoading] = useState(true)
   const [precipPct, setPrecipPct] = useState<number | null>(null)
   const [weatherText, setWeatherText] = useState<string | null>(null)
+  const [tempHi, setTempHi] = useState<number | null>(null)
+  const [tempLo, setTempLo] = useState<number | null>(null)
 
   useEffect(() => {
     // 気象庁JSON API — 大分県 area code: 440000
@@ -66,9 +72,24 @@ export function useWeather(): WeatherResult {
           if (ts1) {
             const areas1 = (ts1.areas as unknown[])[0] as Record<string, unknown>
             const pops = areas1.pops as string[]
-            // First non-empty value
             const firstPop = pops.find((p) => p !== '')
             if (firstPop !== undefined) setPrecipPct(parseInt(firstPop))
+          }
+
+          // timeSeries[2]: temperatures (not always present)
+          const ts2 = ts[2] as Record<string, unknown> | undefined
+          if (ts2) {
+            try {
+              const areas2 = (ts2.areas as unknown[])[0] as Record<string, unknown>
+              const temps = areas2.temps as string[]
+              // temps[0] = morning low, temps[1] = daytime high (area-dependent)
+              if (temps.length >= 2) {
+                const lo = parseInt(temps[0])
+                const hi = parseInt(temps[1])
+                if (!isNaN(hi)) setTempHi(hi)
+                if (!isNaN(lo)) setTempLo(lo)
+              }
+            } catch { /* no temps for this area */ }
           }
         } catch {
           // fail silently
@@ -81,5 +102,5 @@ export function useWeather(): WeatherResult {
       })
   }, [])
 
-  return { weather, season, loading, precipPct, weatherText }
+  return { weather, season, loading, precipPct, weatherText, tempHi, tempLo }
 }

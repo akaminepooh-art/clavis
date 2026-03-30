@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>最終モック</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --cl:#0F6E56;--cl-m:#1D9E75;--cl-l:#E1F5EE;--cl-b:#5DCAA5;
+  --lv:#EEEDFE;--lv-m:#7F77DD;--lv-d:#3C3489;
+  --bl:#E6F1FB;--bl-m:#185FA5;--bl-d:#0C447C;
+  --am:#FAEEDA;--am-m:#BA7517;
+  --gn:#EAF3DE;--gn-m:#639922;
+  --gray:#F1EFE8;--gray-m:#5F5E5A;
+  --border:#e8e6e0;--bg:#f8f7f4;--white:#fff;
+  --text:#1a1a1a;--text-s:#555;--text-t:#999;
+}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:var(--bg);display:flex;justify-content:center;padding:24px 12px;}
+.frame{width:440px;background:var(--white);border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border);background:var(--white);}
+.logo{display:flex;align-items:center;gap:7px;}
+.logo-mark{width:24px;height:24px;background:var(--cl);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.logo-mark svg{width:14px;height:14px;}
+.logo-name{font-size:15px;font-weight:700;color:var(--cl);letter-spacing:.03em;}
+.nav-r{display:flex;align-items:center;gap:6px;}
+.search-box{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;}
+.search-box input{font-size:11px;border:none;background:transparent;color:var(--text);width:100px;outline:none;}
+.search-box svg{width:12px;height:12px;color:var(--text-t);}
+.nav-ft{font-size:10px;padding:4px 9px;border-radius:6px;border:1px solid var(--cl-b);color:var(--cl);cursor:pointer;white-space:nowrap;}
+
+/* HERO */
+.hero{padding:18px 16px 16px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero-season{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;padding:3px 9px;border-radius:99px;margin-bottom:10px;}
+.hero h1{font-size:20px;font-weight:700;line-height:1.45;margin:0 0 7px;color:var(--text);}
+.hero-sub{font-size:12px;color:var(--text-s);margin:0 0 14px;line-height:1.65;}
+.hero-weather{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:10px;padding:9px 12px;margin-bottom:14px;border:1px solid var(--border);}
+.weather-icon{font-size:22px;}
+.weather-info{}
+.weather-area{font-size:10px;color:var(--text-t);margin-bottom:2px;}
+.weather-main{font-size:13px;font-weight:600;color:var(--text);}
+.weather-sub{font-size:10px;color:var(--text-s);margin-top:1px;}
+.weather-temps{margin-left:auto;text-align:right;}
+.weather-hi{font-size:14px;font-weight:700;color:#D85A30;}
+.weather-lo{font-size:12px;color:var(--bl-m);}
+.hero-stats{display:flex;gap:14px;}
+.stat{text-align:center;}
+.stat-num{font-size:16px;font-weight:700;color:var(--cl);}
+.stat-lbl{font-size:9px;color:var(--text-t);margin-top:1px;}
+
+/* FILTER */
+.filter{display:flex;gap:5px;padding:10px 16px;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.filter::-webkit-scrollbar{display:none;}
+.fpill{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:99px;border:1px solid var(--border);font-size:10px;white-space:nowrap;cursor:pointer;background:var(--white);color:var(--text-s);transition:all .15s;}
+.fpill.active{color:var(--white);border-color:transparent;}
+.fpill-dot{width:5px;height:5px;border-radius:50%;}
+
+/* BODY */
+.body{padding:14px 16px;}
+
+/* TODAY PICK */
+.today-pick{background:linear-gradient(135deg,#E1F5EE 0%,#EEEDFE 100%);border-radius:12px;padding:13px 14px;margin-bottom:14px;border:1px solid var(--cl-b);}
+.pick-label{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--cl);margin-bottom:7px;text-transform:uppercase;}
+.pick-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.pick-card{background:rgba(255,255,255,.8);border-radius:9px;padding:8px;cursor:pointer;}
+.pick-card-ic{font-size:16px;margin-bottom:4px;}
+.pick-card-title{font-size:10px;font-weight:600;color:var(--text);margin:0 0 2px;}
+.pick-card-tag{font-size:9px;color:var(--text-t);}
+
+/* SECTION */
+.sec{margin-bottom:16px;}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.sec-title{font-size:12px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;}
+.sec-bar{width:3px;height:13px;border-radius:99px;}
+.sec-more{font-size:10px;color:var(--text-t);cursor:pointer;}
+
+/* CARDS */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.card-lg{border:1px solid var(--border);border-radius:11px;overflow:hidden;background:var(--white);cursor:pointer;}
+.card-lg:hover{border-color:#bbb;}
+.card-lg-img{height:68px;display:flex;align-items:center;justify-content:center;font-size:26px;}
+.card-lg-body{padding:8px 10px 10px;}
+.card-sm{border:1px solid var(--border);border-radius:11px;padding:9px 10px;background:var(--white);cursor:pointer;min-height:76px;display:flex;flex-direction:column;justify-content:space-between;}
+.card-sm:hover{border-color:#bbb;}
+.card-sm-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:5px;}
+.tag{font-size:9px;font-weight:600;padding:2px 6px;border-radius:99px;white-space:nowrap;}
+.tag-self{background:var(--cl-l);color:var(--cl);}
+.tag-health{background:var(--bl);color:var(--bl-d);}
+.tag-fun{background:var(--lv);color:var(--lv-d);}
+.tag-tool{background:var(--gray);color:var(--gray-m);}
+.ct{font-size:11px;font-weight:600;color:var(--text);margin:3px 0 2px;}
+.cd{font-size:10px;color:var(--text-s);margin:0;line-height:1.5;}
+.status{display:flex;align-items:center;gap:3px;font-size:10px;margin-top:4px;}
+.dot-live{width:5px;height:5px;border-radius:50%;background:var(--cl-m);}
+.dot-dev{width:5px;height:5px;border-radius:50%;background:var(--am-m);}
+.dot-soon{width:5px;height:5px;border-radius:50%;background:#bbb;}
+.st{color:var(--text-t);}
+.st-live{color:var(--cl);}
+
+/* LIST */
+.list-sec{border:1px solid var(--border);border-radius:11px;overflow:hidden;}
+.li{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--border);cursor:pointer;}
+.li:last-child{border-bottom:none;}
+.li:hover{background:var(--bg);}
+.li-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.li-body{flex:1;min-width:0;}
+.li-title{font-size:11px;font-weight:600;color:var(--text);margin:0 0 1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.li-desc{font-size:10px;color:var(--text-s);margin:0;}
+.li-badge{font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;white-space:nowrap;}
+.badge-dev{background:var(--am);color:var(--am-m);}
+.badge-soon{background:var(--gray);color:var(--gray-m);}
+.badge-live{background:var(--cl-l);color:var(--cl);}
+
+/* CONTENT ARTICLE (農園が題材として登場) */
+.article-card{border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:14px;cursor:pointer;}
+.article-card:hover{border-color:#bbb;}
+.article-img{height:80px;background:var(--gn);display:flex;align-items:center;justify-content:center;font-size:30px;position:relative;}
+.article-img-tag{position:absolute;top:8px;left:8px;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.9);color:var(--gn-m);}
+.article-body{padding:10px 12px;}
+.article-cat{font-size:9px;color:var(--text-t);margin-bottom:4px;letter-spacing:.05em;text-transform:uppercase;}
+.article-title{font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px;line-height:1.4;}
+.article-desc{font-size:10px;color:var(--text-s);margin:0;line-height:1.5;}
+
+/* COMING */
+.coming{background:var(--bg);border-radius:11px;padding:11px 13px;margin-bottom:14px;border:1px solid var(--border);}
+.coming-title{font-size:10px;font-weight:700;color:var(--text-t);margin:0 0 8px;letter-spacing:.05em;}
+.coming-pills{display:flex;gap:5px;flex-wrap:wrap;}
+.coming-pill{font-size:10px;padding:3px 9px;border-radius:99px;border:1px solid var(--border);color:var(--text-s);background:var(--white);}
+
+/* FORTUNE */
+.fortune-widget{background:var(--lv);border-radius:11px;padding:12px 14px;margin-bottom:14px;border:1px solid #CECBF6;}
+.fortune-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.fortune-title{font-size:11px;font-weight:700;color:var(--lv-d);}
+.fortune-date{font-size:10px;color:var(--lv-m);}
+.fortune-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.fortune-item{background:rgba(255,255,255,.7);border-radius:8px;padding:7px;text-align:center;}
+.fortune-lbl{font-size:9px;color:var(--lv-m);margin-bottom:3px;}
+.fortune-bar{height:3px;background:rgba(127,119,221,.2);border-radius:99px;overflow:hidden;margin-bottom:3px;}
+.fortune-fill{height:100%;border-radius:99px;background:var(--lv-m);}
+.fortune-val{font-size:10px;font-weight:700;color:var(--lv-d);}
+.fortune-lucky{display:flex;gap:6px;margin-top:8px;}
+.lucky-item{flex:1;background:rgba(255,255,255,.6);border-radius:7px;padding:5px 7px;text-align:center;}
+.lucky-lbl{font-size:9px;color:var(--lv-m);margin-bottom:2px;}
+.lucky-val{font-size:10px;font-weight:700;color:var(--lv-d);}
+
+/* FOOTER */
+footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.copy{font-size:10px;color:var(--text-t);}
+.flinks{display:flex;gap:10px;}
+.flinks span{font-size:10px;color:var(--text-t);cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5.5" r="3" stroke="white" stroke-width="1.2"/><path d="M7 8.5V13" stroke="white" stroke-width="1.2" stroke-linecap="round"/><path d="M5 11h4" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <span class="logo-name">【新ブランド名】</span>
+    </div>
+    <div class="nav-r">
+      <div class="search-box">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="5" cy="5" r="3.5"/><path d="M8 8l2.5 2.5" stroke-linecap="round"/></svg>
+        <input placeholder="診断・健康・占い..." />
+      </div>
+      <span class="nav-ft">分析サイト →</span>
+    </div>
+  </nav>
+
+  <!-- HERO：天気×季節で自動変化 -->
+  <section class="hero">
+    <div class="hero-season" id="seasonBadge"></div>
+    <h1 id="heroTitle"></h1>
+    <p class="hero-sub" id="heroSub"></p>
+
+    <!-- 天気ウィジェット（気象庁JSON連動イメージ） -->
+    <div class="hero-weather">
+      <div class="weather-icon" id="weatherIcon">☀️</div>
+      <div class="weather-info">
+        <div class="weather-area" id="weatherArea">大分県 豊後大野市</div>
+        <div class="weather-main" id="weatherMain">晴れ</div>
+        <div class="weather-sub" id="weatherSub">降水確率 10% / 湿度 52%</div>
+      </div>
+      <div class="weather-temps">
+        <div class="weather-hi" id="weatherHi">22°</div>
+        <div class="weather-lo" id="weatherLo">11°</div>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">22+</div><div class="stat-lbl">コンテンツ</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">カテゴリ</div></div>
+      <div class="stat"><div class="stat-num">無料</div><div class="stat-lbl">すべて無料</div></div>
+      <div class="stat"><div class="stat-num">随時</div><div class="stat-lbl">追加中</div></div>
+    </div>
+  </section>
+
+  <!-- FILTER -->
+  <div class="filter">
+    <div class="fpill active" style="background:var(--cl);" onclick="setFilter('all',this)">
+      <div class="fpill-dot" style="background:rgba(255,255,255,.6);"></div>すべて
+    </div>
+    <div class="fpill" onclick="setFilter('self',this)">
+      <div class="fpill-dot" style="background:var(--cl);"></div>自己理解（6）
+    </div>
+    <div class="fpill" onclick="setFilter('health',this)">
+      <div class="fpill-dot" style="background:var(--bl-m);"></div>健康・体（3）
+    </div>
+    <div class="fpill" onclick="setFilter('fun',this)">
+      <div class="fpill-dot" style="background:var(--lv-m);"></div>娯楽・占い（4）
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 本日のピックアップ（日付シードで自動変化） -->
+    <div class="today-pick">
+      <div class="pick-label">✦ 本日のピックアップ</div>
+      <div class="pick-grid" id="pickGrid"></div>
+    </div>
+
+    <!-- 運勢ウィジェット（折りたたみ感） -->
+    <div class="fortune-widget">
+      <div class="fortune-hd">
+        <span class="fortune-title">✨ 今日の運勢</span>
+        <span class="fortune-date" id="fortuneDate"></span>
+      </div>
+      <div class="fortune-grid" id="fortuneGrid"></div>
+      <div class="fortune-lucky" id="fortuneLucky"></div>
+      <p style="font-size:9px;color:var(--lv-m);margin-top:8px;">※娯楽目的です。科学的根拠はありません。</p>
+    </div>
+
+    <!-- 自己理解セクション -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">
+          <div class="sec-bar" style="background:var(--cl);"></div>自己理解・診断
+        </div>
+        <span class="sec-more">6件すべて →</span>
+      </div>
+      <div class="grid2">
+        <div class="card-lg">
+          <div class="card-lg-img" style="background:var(--cl-l);">🧠</div>
+          <div class="card-lg-body">
+            <span class="tag tag-self">診断</span>
+            <p class="ct">IQ診断</p>
+            <p class="cd">知能を多角的に測定。得意分野を発見</p>
+            <div class="status"><span class="dot-soon"></span><span class="st">近日公開</span></div>
+          </div>
+        </div>
+        <div class="card-lg">
+          <div class="card-lg-img" style="background:var(--lv);">🔮</div>
+          <div class="card-lg-body">
+            <span class="tag tag-self">診断</span>
+            <p class="ct">性格診断（INNIQ）</p>
+            <p class="cd">Big5理論ベースの本格25タイプ分析</p>
+            <div class="status"><span class="dot-dev"></span><span class="st">開発中</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="card-sm">
+          <div class="card-sm-top"><p class="ct" style="margin:0;">美容タイプ診断</p><span class="tag tag-self">診断</span></div>
+          <div class="status"><span class="dot-soon"></span><span class="st">近日公開</span></div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-top"><p class="ct" style="margin:0;">ワークタイプ診断</p><span class="tag tag-self">診断</span></div>
+          <div class="status"><span class="dot-soon"></span><span class="st">近日公開</span></div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-top"><p class="ct" style="margin:0;">星つむぎ占い</p><span class="tag tag-fun">占い</span></div>
+          <div class="status"><span class="dot-dev"></span><span class="st">開発中</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 健康セクション -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">
+          <div class="sec-bar" style="background:var(--bl-m);"></div>健康・ヘルスケア
+        </div>
+        <span class="sec-more">3件すべて →</span>
+      </div>
+      <div class="list-sec">
+        <div class="li">
+          <div class="li-ic" style="background:var(--bl);">🏃</div>
+          <div class="li-body">
+            <p class="li-title">BERRYBODY（姿勢分析）</p>
+            <p class="li-desc">カメラで姿勢・体幹バランスを瞬時に分析</p>
+          </div>
+          <span class="li-badge badge-dev">開発中</span>
+        </div>
+        <div class="li">
+          <div class="li-ic" style="background:var(--bl);">💪</div>
+          <div class="li-body">
+            <p class="li-title">AKIRA BODY CHECK</p>
+            <p class="li-desc">スポーツ選手向け体幹・フォーム分析</p>
+          </div>
+          <span class="li-badge badge-dev">開発中</span>
+        </div>
+        <div class="li">
+          <div class="li-ic" style="background:var(--bl);">😮‍💨</div>
+          <div class="li-body">
+            <p class="li-title">ストレスチェッカー</p>
+            <p class="li-desc">質問で現在のストレス状態を数値化</p>
+          </div>
+          <span class="li-badge badge-soon">近日公開</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 農園が「題材」として登場するコンテンツ記事 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">
+          <div class="sec-bar" style="background:var(--gn-m);"></div>今季のコラム
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-img">
+          🍓
+          <div class="article-img-tag">健康 × 農業</div>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">季節の健康知識</div>
+          <p class="article-title">春のいちご狩りで得られる「五感トレーニング」の科学</p>
+          <p class="article-desc">大分の農園で実施された調査によると、収穫体験は集中力指数を平均18%向上させることが示されています。</p>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-img" style="background:var(--bl);">
+          🧘
+          <div class="article-img-tag" style="color:var(--bl-d);">体幹 × 自然</div>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">ボディメンテナンス</div>
+          <p class="article-title">土を触ることが体幹を鍛える理由：農作業と姿勢の関係</p>
+          <p class="article-desc">不整地での作業は体幹インナーマッスルに対して、ジムトレーニングとは異なる多方向の刺激を与えます。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 追加予定コンテンツ -->
+    <div class="coming">
+      <p class="coming-title">追加予定のコンテンツ</p>
+      <div class="coming-pills">
+        <span class="coming-pill">夢診断</span>
+        <span class="coming-pill">カラータイプ診断</span>
+        <span class="coming-pill">決断力診断</span>
+        <span class="coming-pill">睡眠タイプ診断</span>
+        <span class="coming-pill">強み発見テスト</span>
+        <span class="coming-pill">ロト統計</span>
+        <span class="coming-pill">防災チェック</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="copy">© 2026 【新ブランド名】</span>
+    <div class="flinks">
+      <span>利用規約</span><span>プライバシー</span><span>お問い合わせ</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ユーティリティ
+function simpleHash(str){let h=0;for(let i=0;i<str.length;i++){h=(Math.imul(31,h)+str.charCodeAt(i))|0;}return Math.abs(h);}
+function todayStr(){const d=new Date();return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
+function todaySeed(){return simpleHash(todayStr());}
+
+// 季節判定
+function getSeason(){
+  const m=new Date().getMonth()+1;
+  if(m>=3&&m<=5)return{name:'春',emoji:'🌸',bg:'#FBEAF0',color:'#993556'};
+  if(m>=6&&m<=8)return{name:'夏',emoji:'☀️',bg:'#FAEEDA',color:'#854F0B'};
+  if(m>=9&&m<=11)return{name:'秋',emoji:'🍂',bg:'#FAEEDA',color:'#633806'};
+  return{name:'冬',emoji:'❄️',bg:'#E6F1FB',color:'#185FA5'};
+}
+
+// 天気連動ヒーローコピー（今日は晴れパターンで固定表示）
+const WEATHER_COPY={
+  晴:{title:'澄んだ空気が、思考を鋭くする日。',sub:'晴れた日は判断力が高まりやすいといわれています。今日は診断や自己分析に最適です。'},
+  雨:{title:'内側と向き合うのに、最適な日。',sub:'雨の日は内省力が高まる傾向があります。じっくりと自分を知る診断に挑戦してみてください。'},
+  曇:{title:'静かに、自分を整理する日。',sub:'曇り空の落ち着いたトーンの中で、客観的に自己分析をしてみませんか。'},
+};
+
+// 本日ピックアップ（日付シードで自動ローテーション）
+const ALL_CONTENTS=[
+  {ic:'🧠',title:'IQ診断',tag:'診断'},
+  {ic:'✨',title:'INNIQ性格診断',tag:'診断'},
+  {ic:'💄',title:'美容タイプ診断',tag:'診断'},
+  {ic:'🔮',title:'今日の運勢',tag:'占い'},
+  {ic:'🏃',title:'BERRYBODY',tag:'健康'},
+  {ic:'💪',title:'BODY CHECK',tag:'健康'},
+  {ic:'🌙',title:'夢診断',tag:'占い'},
+  {ic:'💼',title:'ワークタイプ診断',tag:'診断'},
+];
+function shuffleSeed(arr,seed){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=simpleHash(`${seed}-${i}`)%(i+1);[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+// 運勢生成
+const LUCKY_COLORS=['赤','青','緑','白','金','紫','橙','黄'];
+const LUCKY_FOODS=['いちご','ナッツ','豆腐','柑橘類','玄米','ハーブティー'];
+const LUCKY_NUMS=[1,3,5,7,8,11,13,22];
+function genFortune(seed){
+  return{
+    love:Math.round(55+simpleHash(`${seed}-love`)%46),
+    work:Math.round(55+simpleHash(`${seed}-work`)%46),
+    money:Math.round(50+simpleHash(`${seed}-money`)%46),
+    health:Math.round(60+simpleHash(`${seed}-health`)%41),
+    color:LUCKY_COLORS[seed%LUCKY_COLORS.length],
+    food:LUCKY_FOODS[seed%LUCKY_FOODS.length],
+    num:LUCKY_NUMS[seed%LUCKY_NUMS.length],
+  };
+}
+
+// 描画
+function render(){
+  const seed=todaySeed();
+  const season=getSeason();
+  const weather='晴';
+  const copy=WEATHER_COPY[weather];
+  const fortune=genFortune(seed);
+  const picked=shuffleSeed(ALL_CONTENTS,seed).slice(0,3);
+
+  // シーズンバッジ
+  const sb=document.getElementById('seasonBadge');
+  sb.textContent=`${season.emoji} ${season.name}の自己理解`;
+  sb.style.cssText=`background:${season.bg};color:${season.color};border:1px solid ${season.color}30;`;
+
+  // ヒーロー
+  document.getElementById('heroTitle').textContent=copy.title;
+  document.getElementById('heroSub').textContent=copy.sub;
+
+  // 天気（大分固定イメージ）
+  document.getElementById('weatherIcon').textContent='☀️';
+  document.getElementById('weatherMain').textContent='晴れ';
+  document.getElementById('weatherSub').textContent='降水確率 10% / 出典：気象庁';
+  document.getElementById('weatherHi').textContent='22°';
+  document.getElementById('weatherLo').textContent='11°';
+
+  // ピックアップ
+  const pg=document.getElementById('pickGrid');
+  pg.innerHTML=picked.map(c=>`
+    <div class="pick-card">
+      <div class="pick-card-ic">${c.ic}</div>
+      <div class="pick-card-title">${c.title}</div>
+      <div class="pick-card-tag">${c.tag}</div>
+    </div>`).join('');
+
+  // 日付
+  const d=new Date();
+  document.getElementById('fortuneDate').textContent=`${d.getMonth()+1}/${d.getDate()}`;
+
+  // 運勢グリッド
+  const fg=document.getElementById('fortuneGrid');
+  const scores=[
+    {lbl:'恋愛運',val:fortune.love},
+    {lbl:'仕事運',val:fortune.work},
+    {lbl:'金運',val:fortune.money},
+    {lbl:'健康運',val:fortune.health},
+  ];
+  fg.innerHTML=scores.map(s=>`
+    <div class="fortune-item">
+      <div class="fortune-lbl">${s.lbl}</div>
+      <div class="fortune-bar"><div class="fortune-fill" style="width:${s.val}%"></div></div>
+      <div class="fortune-val">${s.val}</div>
+    </div>`).join('');
+
+  // ラッキー
+  const fl=document.getElementById('fortuneLucky');
+  fl.innerHTML=`
+    <div class="lucky-item"><div class="lucky-lbl">カラー</div><div class="lucky-val">${fortune.color}</div></div>
+    <div class="lucky-item"><div class="lucky-lbl">フード</div><div class="lucky-val">${fortune.food}</div></div>
+    <div class="lucky-item"><div class="lucky-lbl">数字</div><div class="lucky-val">${fortune.num}</div></div>`;
+}
+
+// フィルター
+function setFilter(type,btn){
+  document.querySelectorAll('.fpill').forEach(p=>{
+    p.classList.remove('active');
+    p.style.background='';
+    p.style.color='';
+    p.style.borderColor='';
+  });
+  btn.classList.add('active');
+  btn.style.background='var(--cl)';
+  btn.style.color='white';
+  btn.style.borderColor='transparent';
+}
+
+render();
+</script>
+</body>
+</html>

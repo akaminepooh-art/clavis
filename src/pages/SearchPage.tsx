@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useContents } from '../hooks/useContents'
 import { useColumns } from '../hooks/useColumns'
 import { useSearch } from '../hooks/useSearch'
@@ -45,6 +46,13 @@ export function SearchPage() {
   const { contents } = useContents()
   const { columns } = useColumns()
   const { query, setQuery, results, hasQuery } = useSearch({ contents, columns })
+
+  // ?q= パラメータからの検索（ヘッダー検索ボックス）
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const q = params.get('q')
+    if (q) setQuery(decodeURIComponent(q))
+  }, [])
 
   const contentResults = results.filter((r) => r.kind === 'content')
   const columnResults = results.filter((r) => r.kind === 'column')
