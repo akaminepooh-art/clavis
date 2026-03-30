@@ -296,7 +296,7 @@ function ArticleCard({ column }: { column: Column }) {
       </div>
       <div className="px-3 py-2.5">
         <p className="text-xs text-gray-400 mb-1 uppercase tracking-wide">
-          {column.category === 'seasonal' ? '季節の健康知識' : column.category === 'science' ? 'サイエンス' : 'ボディメンテナンス'}
+          {info.label}
         </p>
         <p className="text-xs font-bold text-gray-800 mb-1 leading-snug">{column.title}</p>
         <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{column.desc}</p>
