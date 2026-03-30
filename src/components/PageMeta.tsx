@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 const SITE_NAME = 'PORTAKEY'
 const SITE_URL = 'https://portakey.netlify.app'
 const DEFAULT_DESC = '診断・占い・健康・ペットケアを束ねるライフナビゲーション'
-const DEFAULT_OGP = `${SITE_URL}/ogp.svg`
+const DEFAULT_OGP = `${SITE_URL}/ogp.jpg`
 
 type Props = {
   title?: string

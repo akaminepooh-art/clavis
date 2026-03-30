@@ -32,10 +32,10 @@ export const CATEGORY_ICONS: Record<ContentCategory, string> = {
 }
 
 export const CATEGORY_DEFAULTS: Record<ContentCategory, string> = {
-  self: '/images/default-self.svg',
-  health: '/images/default-health.svg',
-  fun: '/images/default-fun.svg',
-  pet: '/images/default-pet.svg',
+  self: '/default-self.jpg',
+  health: '/default-health.jpg',
+  fun: '/default-fun.jpg',
+  pet: '/default-pet.jpg',
 }
 
 export type Column = {

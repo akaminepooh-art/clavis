@@ -381,19 +381,33 @@ export function TopPage() {
       <PageMeta />
       {/* ── HERO ─────────────────────────────── */}
       <section className="px-4 pt-4 pb-3 border-b border-gray-100">
-        {/* Season badge */}
-        <span
-          className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full mb-2.5"
-          style={{ background: seasonStyle.bg, color: seasonStyle.color, border: `1px solid ${seasonStyle.border}` }}
-        >
-          {seasonEmoji} {['spring','summer','autumn','winter'].indexOf(season) >= 0 ? { spring: '春', summer: '夏', autumn: '秋', winter: '冬' }[season] : season}の自己理解
-        </span>
+        <div className="flex items-center gap-3">
+          {/* Left: text content */}
+          <div className="flex-1 min-w-0">
+            {/* Season badge */}
+            <span
+              className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full mb-2.5"
+              style={{ background: seasonStyle.bg, color: seasonStyle.color, border: `1px solid ${seasonStyle.border}` }}
+            >
+              {seasonEmoji} {['spring','summer','autumn','winter'].indexOf(season) >= 0 ? { spring: '春', summer: '夏', autumn: '秋', winter: '冬' }[season] : season}の自己理解
+            </span>
 
-        {/* Hero copy */}
-        <h1 className="text-lg font-bold text-gray-900 leading-snug mb-1.5">{heroCopy}</h1>
-        <p className="text-xs text-gray-500 mb-3 leading-relaxed">
-          {weeklyFeature} — 診断・健康・占いを一箇所で
-        </p>
+            {/* Hero copy */}
+            <h1 className="text-lg font-bold text-gray-900 leading-snug mb-1.5">{heroCopy}</h1>
+            <p className="text-xs text-gray-500 mb-3 leading-relaxed">
+              {weeklyFeature} — 診断・健康・占いを一箇所で
+            </p>
+          </div>
+          {/* Right: hero illustration */}
+          <div className="shrink-0 w-28 h-20 rounded-xl overflow-hidden">
+            <img
+              src="/hero-bg.jpg"
+              alt="PORTAKEY"
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+        </div>
 
         {/* Weather widget */}
         <div className="mb-3">
