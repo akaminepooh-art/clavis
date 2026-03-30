@@ -1,4 +1,4 @@
-const DISCLAIMER = '本コンテンツは娯楽目的です。科学的根拠を持つものではありません。'
+const DISCLAIMER = '※占い・診断コンテンツは娯楽目的です'
 
 export function DisclaimerBanner() {
   return (

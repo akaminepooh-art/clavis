@@ -158,7 +158,7 @@ function PickCard({ content }: { content: Content }) {
 }
 
 // ──────────────────────────────────────
-// Inline fortune widget (seed-based, no birthdate required)
+// Inline fortune widget (生年月日設定済みの場合のみ表示)
 // ──────────────────────────────────────
 const LUCKY_COLORS = ['赤', '青', '緑', '白', '金', '紫', '橙', '黄']
 const LUCKY_FOODS = ['いちご', 'ナッツ', '豆腐', '柑橘類', '玄米', 'ハーブティー', '桃', 'ブルーベリー']
@@ -172,25 +172,52 @@ function deriveScore(seed: number, key: string): number {
   return Math.round(55 + Math.abs(h) % 46)
 }
 
-function FortuneInlineWidget({ seed }: { seed: number }) {
+function birthdateSeed(birthdate: string, today: Date): number {
+  const str = `${birthdate}-${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+  let h = 0
+  for (let i = 0; i < str.length; i++) {
+    h = (Math.imul(31, h) + str.charCodeAt(i)) | 0
+  }
+  return Math.abs(h)
+}
+
+function FortuneInlineWidget() {
+  const birthdate = localStorage.getItem('pk_fortune_birthdate')
+  const today = new Date()
+
+  // 生年月日未設定 → 占いへの誘導カード
+  if (!birthdate) {
+    return (
+      <Link to="/apps/fortune" className="no-underline block">
+        <div className="rounded-xl p-4 border flex items-center gap-3 hover:opacity-90 transition-opacity"
+          style={{ background: '#EEEDFE', borderColor: '#CECBF6' }}>
+          <span className="text-3xl shrink-0">🔮</span>
+          <div>
+            <p className="text-sm font-bold mb-0.5" style={{ color: '#3C3489' }}>今日の運勢を占う</p>
+            <p className="text-xs" style={{ color: '#7F77DD' }}>生年月日を設定して、今日の運勢・ラッキーアイテムを確認しよう →</p>
+          </div>
+        </div>
+      </Link>
+    )
+  }
+
+  const seed = birthdateSeed(birthdate, today)
   const scores = [
     { label: '恋愛運', val: deriveScore(seed, 'love') },
     { label: '仕事運', val: deriveScore(seed, 'work') },
-    { label: '金運', val: deriveScore(seed, 'money') },
+    { label: '金運',   val: deriveScore(seed, 'money') },
     { label: '健康運', val: deriveScore(seed, 'health') },
   ]
   const color = LUCKY_COLORS[seed % LUCKY_COLORS.length]
-  const food = LUCKY_FOODS[seed % LUCKY_FOODS.length]
-  const num = LUCKY_NUMS[seed % LUCKY_NUMS.length]
-  const today = new Date()
+  const food  = LUCKY_FOODS[seed % LUCKY_FOODS.length]
+  const num   = LUCKY_NUMS[seed % LUCKY_NUMS.length]
 
   return (
-    <div className="rounded-xl p-3 border mb-0" style={{ background: '#EEEDFE', borderColor: '#CECBF6' }}>
+    <div className="rounded-xl p-3 border" style={{ background: '#EEEDFE', borderColor: '#CECBF6' }}>
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-bold" style={{ color: '#3C3489' }}>✨ 今日の運勢</span>
         <span className="text-xs" style={{ color: '#7F77DD' }}>{today.getMonth() + 1}/{today.getDate()}</span>
       </div>
-      {/* Scores grid */}
       <div className="grid grid-cols-4 gap-1.5 mb-2">
         {scores.map((s) => (
           <div key={s.label} className="rounded-lg p-1.5 text-center" style={{ background: 'rgba(255,255,255,0.7)' }}>
@@ -202,7 +229,6 @@ function FortuneInlineWidget({ seed }: { seed: number }) {
           </div>
         ))}
       </div>
-      {/* Lucky items */}
       <div className="flex gap-1.5 mb-2">
         {[{ label: 'カラー', val: color }, { label: 'フード', val: food }, { label: '数字', val: String(num) }].map((item) => (
           <div key={item.label} className="flex-1 rounded-lg py-1 text-center" style={{ background: 'rgba(255,255,255,0.6)' }}>
@@ -211,12 +237,9 @@ function FortuneInlineWidget({ seed }: { seed: number }) {
           </div>
         ))}
       </div>
-      <p className="text-xs" style={{ color: '#7F77DD' }}>
-        ※娯楽目的です。科学的根拠はありません。
-        <Link to="/apps/fortune" className="ml-1 underline no-underline" style={{ color: '#7F77DD' }}>
-          生年月日で詳細を見る →
-        </Link>
-      </p>
+      <Link to="/apps/fortune" className="text-xs no-underline" style={{ color: '#7F77DD' }}>
+        詳細を見る →
+      </Link>
     </div>
   )
 }
@@ -461,7 +484,7 @@ export function TopPage() {
             )}
 
             {/* FORTUNE INLINE WIDGET */}
-            <FortuneInlineWidget seed={seed} />
+            <FortuneInlineWidget />
 
             {/* PERSONALIZED */}
             {isPersonalized && !loading && (
