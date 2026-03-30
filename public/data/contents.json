@@ -2,7 +2,7 @@
   {
     "id": "hoshitsumugi",
     "title": "星つむぎ",
-    "category": "fun",
+    "category": "fortune",
     "type": "external",
     "status": "live",
     "url": "https://hoshitsumugi.netlify.app/",
@@ -11,12 +11,17 @@
     "disclaimer_required": true,
     "sort_order": 1,
     "is_featured": true,
-    "tags": ["四柱推命", "星", "占い", "つむぎ"]
+    "tags": [
+      "四柱推命",
+      "星",
+      "占い",
+      "つむぎ"
+    ]
   },
   {
     "id": "kaze-tsumugi",
     "title": "風つむぎ",
-    "category": "fun",
+    "category": "fortune",
     "type": "external",
     "status": "live",
     "url": "https://kaze-tsumugi.netlify.app/",
@@ -25,12 +30,17 @@
     "disclaimer_required": true,
     "sort_order": 2,
     "is_featured": true,
-    "tags": ["方位", "風水", "占い", "つむぎ"]
+    "tags": [
+      "方位",
+      "風水",
+      "占い",
+      "つむぎ"
+    ]
   },
   {
     "id": "mei-tsumugi",
     "title": "名つむぎ",
-    "category": "fun",
+    "category": "fortune",
     "type": "external",
     "status": "live",
     "url": "https://mei-tsumugi.netlify.app/",
@@ -39,12 +49,16 @@
     "disclaimer_required": true,
     "sort_order": 3,
     "is_featured": true,
-    "tags": ["姓名判断", "占い", "つむぎ"]
+    "tags": [
+      "姓名判断",
+      "占い",
+      "つむぎ"
+    ]
   },
   {
     "id": "en-tsumugi",
     "title": "縁つむぎ",
-    "category": "fun",
+    "category": "fortune",
     "type": "external",
     "status": "live",
     "url": "https://en-tsumugi.netlify.app/",
@@ -53,12 +67,16 @@
     "disclaimer_required": true,
     "sort_order": 4,
     "is_featured": false,
-    "tags": ["相性", "占い", "つむぎ"]
+    "tags": [
+      "相性",
+      "占い",
+      "つむぎ"
+    ]
   },
   {
     "id": "yume-tsumugi",
     "title": "夢つむぎ",
-    "category": "fun",
+    "category": "fortune",
     "type": "external",
     "status": "live",
     "url": "https://yume-tsumugi.netlify.app/",
@@ -67,12 +85,16 @@
     "disclaimer_required": true,
     "sort_order": 5,
     "is_featured": false,
-    "tags": ["夢占い", "占い", "つむぎ"]
+    "tags": [
+      "夢占い",
+      "占い",
+      "つむぎ"
+    ]
   },
   {
     "id": "fortune-today",
     "title": "今日の運勢",
-    "category": "fun",
+    "category": "fortune",
     "type": "instant",
     "status": "live",
     "url": "/apps/fortune",
@@ -81,12 +103,15 @@
     "disclaimer_required": true,
     "sort_order": 6,
     "is_featured": false,
-    "tags": ["占い", "運勢"]
+    "tags": [
+      "占い",
+      "運勢"
+    ]
   },
   {
     "id": "loto-analyzer",
     "title": "ロトアナライザー",
-    "category": "fun",
+    "category": "game",
     "type": "external",
     "status": "live",
     "url": "https://loto-analyzer.netlify.app/",
@@ -95,12 +120,17 @@
     "disclaimer_required": true,
     "sort_order": 7,
     "is_featured": false,
-    "tags": ["ロト", "統計", "解析", "娯楽"]
+    "tags": [
+      "ロト",
+      "統計",
+      "解析",
+      "娯楽"
+    ]
   },
   {
     "id": "numbers-analyzer",
     "title": "ナンバーズアナライザー",
-    "category": "fun",
+    "category": "game",
     "type": "external",
     "status": "live",
     "url": "https://numbers-analyzer.netlify.app/",
@@ -109,12 +139,17 @@
     "disclaimer_required": true,
     "sort_order": 8,
     "is_featured": false,
-    "tags": ["ナンバーズ", "統計", "解析", "娯楽"]
+    "tags": [
+      "ナンバーズ",
+      "統計",
+      "解析",
+      "娯楽"
+    ]
   },
   {
     "id": "farm-tactics-rpg",
     "title": "農園タクティクスRPG",
-    "category": "fun",
+    "category": "game",
     "type": "webapp",
     "status": "dev",
     "url": null,
@@ -123,7 +158,10 @@
     "disclaimer_required": false,
     "sort_order": 8,
     "is_featured": false,
-    "tags": ["ゲーム", "RPG"]
+    "tags": [
+      "ゲーム",
+      "RPG"
+    ]
   },
   {
     "id": "inniq",
@@ -137,7 +175,10 @@
     "disclaimer_required": false,
     "sort_order": 10,
     "is_featured": true,
-    "tags": ["性格診断", "25タイプ"]
+    "tags": [
+      "性格診断",
+      "25タイプ"
+    ]
   },
   {
     "id": "iqvolt",
@@ -151,7 +192,11 @@
     "disclaimer_required": false,
     "sort_order": 11,
     "is_featured": true,
-    "tags": ["認知能力", "IQ", "VOLT"]
+    "tags": [
+      "認知能力",
+      "IQ",
+      "VOLT"
+    ]
   },
   {
     "id": "workvolt",
@@ -165,7 +210,11 @@
     "disclaimer_required": false,
     "sort_order": 12,
     "is_featured": false,
-    "tags": ["職業適性", "仕事", "VOLT"]
+    "tags": [
+      "職業適性",
+      "仕事",
+      "VOLT"
+    ]
   },
   {
     "id": "colorvolt",
@@ -179,7 +228,11 @@
     "disclaimer_required": false,
     "sort_order": 13,
     "is_featured": false,
-    "tags": ["色彩認知", "感性", "VOLT"]
+    "tags": [
+      "色彩認知",
+      "感性",
+      "VOLT"
+    ]
   },
   {
     "id": "decidevolt",
@@ -193,7 +246,11 @@
     "disclaimer_required": false,
     "sort_order": 14,
     "is_featured": false,
-    "tags": ["意思決定", "決断", "VOLT"]
+    "tags": [
+      "意思決定",
+      "決断",
+      "VOLT"
+    ]
   },
   {
     "id": "venturevolt",
@@ -207,7 +264,11 @@
     "disclaimer_required": false,
     "sort_order": 15,
     "is_featured": false,
-    "tags": ["起業家", "挑戦", "VOLT"]
+    "tags": [
+      "起業家",
+      "挑戦",
+      "VOLT"
+    ]
   },
   {
     "id": "berrybody",
@@ -221,7 +282,11 @@
     "disclaimer_required": false,
     "sort_order": 20,
     "is_featured": false,
-    "tags": ["診断", "姿勢", "体幹"]
+    "tags": [
+      "診断",
+      "姿勢",
+      "体幹"
+    ]
   },
   {
     "id": "akira-body-check",
@@ -235,7 +300,10 @@
     "disclaimer_required": false,
     "sort_order": 21,
     "is_featured": false,
-    "tags": ["診断", "体幹"]
+    "tags": [
+      "診断",
+      "体幹"
+    ]
   },
   {
     "id": "beauty-type",
@@ -249,7 +317,10 @@
     "disclaimer_required": false,
     "sort_order": 22,
     "is_featured": false,
-    "tags": ["診断", "美容"]
+    "tags": [
+      "診断",
+      "美容"
+    ]
   },
   {
     "id": "disaster-checklist",
@@ -263,7 +334,10 @@
     "disclaimer_required": false,
     "sort_order": 30,
     "is_featured": false,
-    "tags": ["防災", "チェックリスト"]
+    "tags": [
+      "防災",
+      "チェックリスト"
+    ]
   },
   {
     "id": "farm-experience",
@@ -277,7 +351,11 @@
     "disclaimer_required": false,
     "sort_order": 31,
     "is_featured": false,
-    "tags": ["農園", "体験", "アウトドア"]
+    "tags": [
+      "農園",
+      "体験",
+      "アウトドア"
+    ]
   },
   {
     "id": "koepal",
@@ -291,6 +369,10 @@
     "disclaimer_required": false,
     "sort_order": 40,
     "is_featured": true,
-    "tags": ["ペット", "AI", "コミュニケーション"]
+    "tags": [
+      "ペット",
+      "AI",
+      "コミュニケーション"
+    ]
   }
 ]

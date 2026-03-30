@@ -4,7 +4,7 @@ import { CATEGORY_DEFAULTS } from '../types'
 import { StatusBadge } from './StatusBadge'
 import { interest } from '../utils/interest'
 
-const TRACKED = ['self', 'health', 'fun'] as const
+const TRACKED = ['self', 'health', 'fortune', 'game'] as const
 type TrackedCat = typeof TRACKED[number]
 
 function trackClick(category: string) {

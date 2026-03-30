@@ -9,7 +9,7 @@ import { interest } from '../utils/interest'
 import type { ContentCategory } from '../types'
 
 // Categories tracked by interest system
-const TRACKED: ContentCategory[] = ['self', 'health', 'fun']
+const TRACKED: ContentCategory[] = ['self', 'health', 'fortune', 'game']
 
 export function ContentPage() {
   const { contentId } = useParams<{ contentId: string }>()
@@ -24,7 +24,7 @@ export function ContentPage() {
     if (!TRACKED.includes(content.category as ContentCategory)) return
 
     timerRef.current = setTimeout(() => {
-      interest.add(content.category as 'self' | 'health' | 'fun', 2)
+      interest.add(content.category as 'self' | 'health' | 'fortune' | 'game', 2)
     }, 10_000)
 
     return () => {
@@ -89,7 +89,7 @@ export function ContentPage() {
               rel="noopener noreferrer"
               onClick={() => {
                 if (TRACKED.includes(content.category as ContentCategory)) {
-                  interest.add(content.category as 'self' | 'health' | 'fun', 1)
+                  interest.add(content.category as 'self' | 'health' | 'fortune' | 'game', 1)
                 }
               }}
               className="inline-block px-6 py-3 bg-pk-primary text-white rounded-xl font-bold hover:bg-pk-primary-mid transition-colors no-underline"

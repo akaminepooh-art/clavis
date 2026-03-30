@@ -17,12 +17,12 @@ export function CategoryPage() {
   const label = CATEGORY_LABELS[category]
   const icon = CATEGORY_ICONS[category]
   const filtered = contents.filter((c) => c.category === category)
-  const showDisclaimer = category === 'fun'
+  const showDisclaimer = category === 'fortune'
 
-  const TRACKED_CATS = ['self', 'health', 'fun'] as const
+  const TRACKED_CATS = ['self', 'health', 'fortune', 'game'] as const
   useEffect(() => {
     if (category && (TRACKED_CATS as readonly string[]).includes(category)) {
-      interest.add(category as 'self' | 'health' | 'fun', 1)
+      interest.add(category as 'self' | 'health' | 'fortune' | 'game', 1)
     }
   }, [category])
 

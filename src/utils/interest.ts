@@ -1,7 +1,8 @@
 type InterestMap = {
-  self:   number
-  health: number
-  fun:    number
+  self:    number
+  health:  number
+  fortune: number
+  game:    number
 }
 
 const KEY = 'pk_interest'
@@ -9,9 +10,9 @@ const KEY = 'pk_interest'
 export const interest = {
   get: (): InterestMap => {
     try {
-      return JSON.parse(localStorage.getItem(KEY) || '{"self":0,"health":0,"fun":0}')
+      return JSON.parse(localStorage.getItem(KEY) || '{"self":0,"health":0,"fortune":0,"game":0}')
     } catch {
-      return { self: 0, health: 0, fun: 0 }
+      return { self: 0, health: 0, fortune: 0, game: 0 }
     }
   },
 

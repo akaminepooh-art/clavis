@@ -15,18 +15,20 @@ import { hashDate, shuffleSeed, weekNumber } from '../utils/seed'
 import { interest } from '../utils/interest'
 
 // URLパラメータ ?result=xxx&from=xxx
-const APP_CATEGORY_MAP: Record<string, 'self' | 'health' | 'fun'> = {
+const APP_CATEGORY_MAP: Record<string, 'self' | 'health' | 'fortune' | 'game'> = {
   inniq: 'self', iq: 'self', beauty: 'self', work: 'self', decidevolt: 'self',
-  hoshi: 'fun', kaze: 'fun', mei: 'fun', en: 'fun', yume: 'fun',
+  hoshi: 'fortune', kaze: 'fortune', mei: 'fortune', en: 'fortune', yume: 'fortune',
+  loto: 'game', numbers: 'game',
 }
 
 // Category color scheme
 const CAT_STYLE: Record<string, { dot: string; activeBg: string; bar: string }> = {
-  all:    { dot: '#1D9E75', activeBg: '#0F6E56', bar: '#0F6E56' },
-  self:   { dot: '#0F6E56', activeBg: '#0F6E56', bar: '#0F6E56' },
-  health: { dot: '#185FA5', activeBg: '#185FA5', bar: '#185FA5' },
-  fun:    { dot: '#7F77DD', activeBg: '#7F77DD', bar: '#7F77DD' },
-  pet:    { dot: '#BA7517', activeBg: '#BA7517', bar: '#BA7517' },
+  all:     { dot: '#1D9E75', activeBg: '#0F6E56', bar: '#0F6E56' },
+  self:    { dot: '#0F6E56', activeBg: '#0F6E56', bar: '#0F6E56' },
+  health:  { dot: '#185FA5', activeBg: '#185FA5', bar: '#185FA5' },
+  fortune: { dot: '#7F77DD', activeBg: '#7F77DD', bar: '#7F77DD' },
+  game:    { dot: '#C0392B', activeBg: '#C0392B', bar: '#C0392B' },
+  pet:     { dot: '#BA7517', activeBg: '#BA7517', bar: '#BA7517' },
 }
 
 const SEASON_STYLE: Record<string, { bg: string; color: string; border: string }> = {
@@ -83,11 +85,12 @@ function FilterTabs({
   counts: Record<string, number>
 }) {
   const tabs: { key: ContentCategory | 'all'; label: string }[] = [
-    { key: 'all', label: 'すべて' },
-    { key: 'self', label: '自己理解' },
-    { key: 'health', label: '健康・体' },
-    { key: 'fun', label: '娯楽・占い' },
-    { key: 'pet', label: 'ペット' },
+    { key: 'all',     label: 'すべて' },
+    { key: 'self',    label: '自己理解' },
+    { key: 'health',  label: '健康・体' },
+    { key: 'fortune', label: '占い' },
+    { key: 'game',    label: '娯楽・ゲーム' },
+    { key: 'pet',     label: 'ペット' },
   ]
   return (
     <div className="flex gap-1.5 px-4 py-2.5 overflow-x-auto scrollbar-none border-b border-gray-100">
@@ -120,7 +123,7 @@ function FilterTabs({
 // Pickup mini card
 // ──────────────────────────────────────
 function PickCard({ content }: { content: Content }) {
-  const ICONS: Record<ContentCategory, string> = { self: '🧠', health: '🏃', fun: '🔮', pet: '🐾' }
+  const ICONS: Record<ContentCategory, string> = { self: '🧠', health: '🏃', fortune: '🔮', game: '🎮', pet: '🐾' }
   const isClickable = content.status === 'live' && content.url
   const card = (
     <div className="bg-white/80 rounded-lg overflow-hidden cursor-pointer hover:bg-white transition-colors">
@@ -318,11 +321,12 @@ export function TopPage() {
 
   // Category counts
   const counts: Record<string, number> = {
-    all: contents.length,
-    self: contents.filter((c) => c.category === 'self').length,
-    health: contents.filter((c) => c.category === 'health').length,
-    fun: contents.filter((c) => c.category === 'fun').length,
-    pet: contents.filter((c) => c.category === 'pet').length,
+    all:     contents.length,
+    self:    contents.filter((c) => c.category === 'self').length,
+    health:  contents.filter((c) => c.category === 'health').length,
+    fortune: contents.filter((c) => c.category === 'fortune').length,
+    game:    contents.filter((c) => c.category === 'game').length,
+    pet:     contents.filter((c) => c.category === 'pet').length,
   }
 
   const selfContents = contents.filter((c) => c.category === 'self')
@@ -512,18 +516,27 @@ export function TopPage() {
               </section>
             )}
 
-            {/* FUN SECTION */}
+            {/* FORTUNE SECTION */}
             {!loading && (
               <section>
-                <SecHeader title="娯楽・占い" color="#7F77DD" count={counts.fun} linkTo="/category/fun" />
+                <SecHeader title="占い" color="#7F77DD" count={counts.fortune} linkTo="/category/fortune" />
                 <div className="grid grid-cols-2 gap-3">
-                  {contents.filter((c) => c.category === 'fun' && c.status === 'live').slice(0, 4).map((c) => (
+                  {contents.filter((c) => c.category === 'fortune' && c.status === 'live').slice(0, 4).map((c) => (
                     <ContentCard key={c.id} content={c} />
                   ))}
                 </div>
-                <p className="text-xs text-gray-400 mt-2">
-                  ※占い・運勢コンテンツは娯楽目的です。科学的根拠を持つものではありません。
-                </p>
+              </section>
+            )}
+
+            {/* GAME SECTION */}
+            {!loading && contents.filter((c) => c.category === 'game').length > 0 && (
+              <section>
+                <SecHeader title="娯楽・ゲーム" color="#C0392B" count={counts.game} linkTo="/category/game" />
+                <div className="grid grid-cols-2 gap-3">
+                  {contents.filter((c) => c.category === 'game' && c.status === 'live').slice(0, 4).map((c) => (
+                    <ContentCard key={c.id} content={c} />
+                  ))}
+                </div>
               </section>
             )}
 

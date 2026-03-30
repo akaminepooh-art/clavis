@@ -63,7 +63,7 @@ export function FortunePage() {
       date: today,
       result: fortune,
     })
-    interest.add('fun', 5)
+    interest.add('fortune', 5)
   }
 
   async function handleImageDownload() {

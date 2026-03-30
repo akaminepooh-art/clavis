@@ -19,7 +19,8 @@ type UsePersonalizedResult = {
 const CATEGORY_MAP: Record<string, string[]> = {
   self: ['self'],
   health: ['health', 'nature'],
-  fun: ['fun', 'seasonal', 'science'],
+  fortune: ['fortune', 'seasonal', 'science'],
+  game: ['game'],
 }
 
 export function usePersonalized({

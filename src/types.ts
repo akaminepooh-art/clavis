@@ -1,4 +1,4 @@
-export type ContentCategory = 'self' | 'health' | 'fun' | 'pet'
+export type ContentCategory = 'self' | 'health' | 'fortune' | 'game' | 'pet'
 export type ContentType = 'webapp' | 'instant' | 'video' | 'external'
 export type ContentStatus = 'live' | 'dev' | 'planned'
 
@@ -20,21 +20,24 @@ export type Content = {
 export const CATEGORY_LABELS: Record<ContentCategory, string> = {
   self: '自己理解・診断',
   health: '健康・ヘルスケア',
-  fun: '娯楽・占い',
+  fortune: '占い',
+  game: '娯楽・ゲーム',
   pet: 'ペット',
 }
 
 export const CATEGORY_ICONS: Record<ContentCategory, string> = {
   self: '🧠',
   health: '🏥',
-  fun: '🔮',
+  fortune: '🔮',
+  game: '🎮',
   pet: '🐾',
 }
 
 export const CATEGORY_DEFAULTS: Record<ContentCategory, string> = {
   self: '/default-self.jpg',
   health: '/default-health.jpg',
-  fun: '/default-fun.jpg',
+  fortune: '/default-fun.jpg',
+  game: '/default-fun.jpg',
   pet: '/default-pet.jpg',
 }
 
