@@ -212,7 +212,7 @@
   {
     "id": "berrybody",
     "title": "BERRYBODY（姿勢分析）",
-    "category": "self",
+    "category": "health",
     "type": "webapp",
     "status": "dev",
     "url": null,
@@ -226,7 +226,7 @@
   {
     "id": "akira-body-check",
     "title": "AKIRA BODY CHECK（体幹分析）",
-    "category": "self",
+    "category": "health",
     "type": "webapp",
     "status": "dev",
     "url": null,
@@ -240,7 +240,7 @@
   {
     "id": "beauty-type",
     "title": "美容タイプ診断",
-    "category": "self",
+    "category": "health",
     "type": "webapp",
     "status": "planned",
     "url": null,
