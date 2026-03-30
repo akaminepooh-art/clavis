@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { PageMeta } from '../components/PageMeta'
 import { useContents } from '../hooks/useContents'
 import { useColumns } from '../hooks/useColumns'
 import { useSearch } from '../hooks/useSearch'
@@ -59,6 +60,7 @@ export function SearchPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
+      <PageMeta title="検索" description="コンテンツとコラムをキーワードで横断検索" path="/search" />
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">🔍 検索</h1>
         <p className="text-sm text-gray-500 mb-4">

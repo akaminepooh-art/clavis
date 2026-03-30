@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { PageMeta } from '../components/PageMeta'
 import { useContents } from '../hooks/useContents'
 import { StatusBadge } from '../components/StatusBadge'
 import { DisclaimerBanner } from '../components/DisclaimerBanner'
@@ -52,6 +53,11 @@ export function ContentPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
+      <PageMeta
+        title={content.title}
+        description={content.description}
+        path={`/content/${content.id}`}
+      />
       <Link to="/" className="text-sm text-gray-500 hover:text-pk-primary no-underline mb-4 inline-block">
         &larr; トップへ戻る
       </Link>

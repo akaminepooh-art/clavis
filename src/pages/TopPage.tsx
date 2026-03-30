@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { PageMeta } from '../components/PageMeta'
 import { useContents } from '../hooks/useContents'
 import { useColumns } from '../hooks/useColumns'
 import { useWeather } from '../hooks/useWeather'
@@ -38,8 +39,14 @@ const SEASON_EMOJI: Record<string, string> = {
 }
 
 const COMING_SOON = [
-  '夢診断', 'カラータイプ診断', '決断力診断', '睡眠タイプ診断',
-  '強み発見テスト', 'ロト統計', '防災チェック', 'BERRYBODY姿勢分析',
+  { emoji: '🌙', label: '夢診断' },
+  { emoji: '🎨', label: 'カラータイプ診断' },
+  { emoji: '⚡', label: '決断力診断' },
+  { emoji: '💤', label: '睡眠タイプ診断' },
+  { emoji: '🏆', label: '強み発見テスト' },
+  { emoji: '🍀', label: 'ロト統計' },
+  { emoji: '🚨', label: '防災チェック' },
+  { emoji: '🧍', label: 'BERRYBODY姿勢分析' },
 ]
 
 // ──────────────────────────────────────
@@ -371,6 +378,7 @@ export function TopPage() {
 
   return (
     <div>
+      <PageMeta />
       {/* ── HERO ─────────────────────────────── */}
       <section className="px-4 pt-4 pb-3 border-b border-gray-100">
         {/* Season badge */}
@@ -551,9 +559,9 @@ export function TopPage() {
             <div className="rounded-xl px-3 py-2.5" style={{ background: '#F1EFE8', border: '1px solid #e8e6e0' }}>
               <p className="text-xs font-bold text-gray-400 mb-2 tracking-wide">追加予定のコンテンツ</p>
               <div className="flex flex-wrap gap-1.5">
-                {COMING_SOON.map((name) => (
-                  <span key={name} className="text-xs px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-500">
-                    {name}
+                {COMING_SOON.map(({ emoji, label }) => (
+                  <span key={label} className="text-xs px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-500 flex items-center gap-1">
+                    <span>{emoji}</span>{label}
                   </span>
                 ))}
               </div>

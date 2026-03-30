@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { PageMeta } from '../../components/PageMeta'
 import { generateFortune, type FortuneResult } from './logic'
 import { DisclaimerBanner } from '../../components/DisclaimerBanner'
 import { generateShareImage } from '../../utils/shareImage'
@@ -77,6 +78,11 @@ export function FortunePage() {
 
   return (
     <div className="max-w-xl mx-auto px-4 py-8">
+      <PageMeta
+        title="今日の運勢"
+        description="生年月日から今日の運勢を占う。恋愛・仕事・金運・健康の4軸で毎日更新。"
+        path="/apps/fortune"
+      />
       <Link to="/" className="text-sm text-gray-500 hover:text-pk-primary no-underline mb-4 inline-block">
         &larr; トップへ戻る
       </Link>
