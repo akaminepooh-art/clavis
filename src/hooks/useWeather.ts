@@ -4,8 +4,7 @@ export type WeatherState = 'sunny' | 'cloudy' | 'rainy'
 export type Season = 'spring' | 'summer' | 'autumn' | 'winter'
 
 function getWeatherFromCode(code: number): WeatherState {
-  const s = String(code)
-  const first = parseInt(s[0])
+  const first = parseInt(String(code)[0])
   if (first === 1) return 'sunny'
   if (first === 3 || first === 2) return 'rainy'
   return 'cloudy'
@@ -19,10 +18,14 @@ function getSeason(date: Date): Season {
   return 'winter'
 }
 
-type WeatherResult = {
+export type WeatherResult = {
   weather: WeatherState
   season: Season
   loading: boolean
+  /** 今日の降水確率（0〜100, nullなら取得不可） */
+  precipPct: number | null
+  /** 気象庁の天気テキスト e.g. "晴れ" */
+  weatherText: string | null
 }
 
 export function useWeather(): WeatherResult {
@@ -31,36 +34,52 @@ export function useWeather(): WeatherResult {
 
   const [weather, setWeather] = useState<WeatherState>('sunny')
   const [loading, setLoading] = useState(true)
+  const [precipPct, setPrecipPct] = useState<number | null>(null)
+  const [weatherText, setWeatherText] = useState<string | null>(null)
 
   useEffect(() => {
     // 気象庁JSON API — 大分県 area code: 440000
-    const url =
-      'https://www.jma.go.jp/bosai/forecast/data/forecast/440000.json'
-
-    fetch(url)
+    fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/440000.json')
       .then((res) => {
         if (!res.ok) throw new Error('JMA fetch failed')
         return res.json()
       })
       .then((data: unknown[]) => {
         try {
-          // data[0].timeSeries[0].areas[0].weatherCodes[0] = today's code for Oita
-          const series = (data[0] as Record<string, unknown>).timeSeries as unknown[]
-          const areas = (series[0] as Record<string, unknown>).areas as unknown[]
-          const codes = (areas[0] as Record<string, unknown>).weatherCodes as string[]
+          const d0 = data[0] as Record<string, unknown>
+          const ts = d0.timeSeries as unknown[]
+
+          // timeSeries[0]: weatherCodes & weathers
+          const ts0 = ts[0] as Record<string, unknown>
+          const areas0 = (ts0.areas as unknown[])[0] as Record<string, unknown>
+          const codes = areas0.weatherCodes as string[]
+          const weathers = areas0.weathers as string[] | undefined
           const code = parseInt(codes[0])
           setWeather(getWeatherFromCode(code))
+          if (weathers?.[0]) {
+            // clean up whitespace/fullwidth spaces in JMA text
+            setWeatherText(weathers[0].replace(/\s+/g, ''))
+          }
+
+          // timeSeries[1]: pops (precipitation probability, 6-hour blocks)
+          const ts1 = ts[1] as Record<string, unknown> | undefined
+          if (ts1) {
+            const areas1 = (ts1.areas as unknown[])[0] as Record<string, unknown>
+            const pops = areas1.pops as string[]
+            // First non-empty value
+            const firstPop = pops.find((p) => p !== '')
+            if (firstPop !== undefined) setPrecipPct(parseInt(firstPop))
+          }
         } catch {
-          setWeather('sunny')
+          // fail silently
         }
         setLoading(false)
       })
       .catch(() => {
-        // Fail silently — default to sunny
         setWeather('sunny')
         setLoading(false)
       })
   }, [])
 
-  return { weather, season, loading }
+  return { weather, season, loading, precipPct, weatherText }
 }

@@ -18,8 +18,9 @@ export function CategoryPage() {
   const filtered = contents.filter((c) => c.category === category)
   const showDisclaimer = category === 'fun'
 
+  const TRACKED_CATS = ['self', 'health', 'fun'] as const
   useEffect(() => {
-    if (category && CATEGORY_LABELS[category]) {
+    if (category && (TRACKED_CATS as readonly string[]).includes(category)) {
       interest.add(category as 'self' | 'health' | 'fun', 1)
     }
   }, [category])

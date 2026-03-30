@@ -2,6 +2,16 @@ import { Link } from 'react-router-dom'
 import type { Content } from '../types'
 import { CATEGORY_DEFAULTS } from '../types'
 import { StatusBadge } from './StatusBadge'
+import { interest } from '../utils/interest'
+
+const TRACKED = ['self', 'health', 'fun'] as const
+type TrackedCat = typeof TRACKED[number]
+
+function trackClick(category: string) {
+  if ((TRACKED as readonly string[]).includes(category)) {
+    interest.add(category as TrackedCat, 1)
+  }
+}
 
 export function ContentCard({ content }: { content: Content }) {
   const thumbnail = content.thumbnail_url ?? CATEGORY_DEFAULTS[content.category]
@@ -56,12 +66,26 @@ export function ContentCard({ content }: { content: Content }) {
   if (isClickable && content.url) {
     if (content.type === 'external') {
       return (
-        <a href={content.url} target="_blank" rel="noopener noreferrer" className="no-underline">
+        <a
+          href={content.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline"
+          onClick={() => trackClick(content.category)}
+        >
           {card}
         </a>
       )
     }
-    return <Link to={content.url} className="no-underline">{card}</Link>
+    return (
+      <Link
+        to={content.url}
+        className="no-underline"
+        onClick={() => trackClick(content.category)}
+      >
+        {card}
+      </Link>
+    )
   }
 
   return card

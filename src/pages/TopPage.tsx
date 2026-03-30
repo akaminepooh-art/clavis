@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useContents } from '../hooks/useContents'
 import { useColumns } from '../hooks/useColumns'
@@ -6,11 +6,25 @@ import { useWeather } from '../hooks/useWeather'
 import { ContentCard } from '../components/ContentCard'
 import { SkeletonCard } from '../components/SkeletonCard'
 import { StatusBadge } from '../components/StatusBadge'
+import { WeatherWidget } from '../components/WeatherWidget'
 import { CATEGORY_LABELS, CATEGORY_ICONS } from '../types'
 import type { ContentCategory, Content, Column } from '../types'
 import { getHeroCopy, WEEKLY_FEATURES } from '../data/heroCopies'
 import { hashDate, shuffleSeed, weekNumber } from '../utils/seed'
 import { interest } from '../utils/interest'
+
+// URLパラメータ ?result=xxx&from=xxx → category map
+const APP_CATEGORY_MAP: Record<string, 'self' | 'health' | 'fun'> = {
+  inniq: 'self',
+  iq: 'self',
+  beauty: 'self',
+  work: 'self',
+  hoshi: 'fun',
+  kaze: 'fun',
+  mei: 'fun',
+  en: 'fun',
+  yume: 'fun',
+}
 
 // ────────────────────────────────────────────────
 // Constants
@@ -281,12 +295,27 @@ function ColumnCard({ column }: { column: Column }) {
 
 export function TopPage() {
   const { contents, loading } = useContents()
-  const { weather, season } = useWeather()
+  const { weather, season, loading: weatherLoading, precipPct, weatherText } = useWeather()
   const today = new Date()
   const seed = hashDate(today)
   const weekNum = weekNumber(today)
 
   const [activeCategory, setActiveCategory] = useState<ContentCategory | 'all'>('all')
+  const [returnMsg, setReturnMsg] = useState<{ result: string; from: string } | null>(null)
+
+  // URLパラメータ受信: ?result=xxx&from=xxx (外部アプリからの帰還)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const result = params.get('result')
+    const from = params.get('from')
+    if (result && from) {
+      const category = APP_CATEGORY_MAP[from]
+      if (category) interest.add(category, 5)
+      setReturnMsg({ result, from })
+      // URLをクリーンに（履歴に残さない）
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [])
 
   // Category filter
   const visibleContents = activeCategory === 'all'
@@ -357,12 +386,30 @@ export function TopPage() {
             診断・占い・健康・ペットケアを束ねるライフナビゲーション
           </p>
 
+          {/* Weather widget */}
+          <div className="flex justify-center mt-2">
+            <WeatherWidget
+              weather={weather}
+              weatherText={weatherText}
+              precipPct={precipPct}
+              loading={weatherLoading}
+            />
+          </div>
+
           {/* Stats bar */}
           <StatsBar total={contents.length} liveCount={liveContents.length} />
         </div>
       </section>
 
       <div className="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        {/* Return message from external app */}
+        {returnMsg && (
+          <div className="bg-pk-primary-light border border-pk-primary-border rounded-xl px-4 py-3 text-sm text-pk-primary flex items-center gap-2">
+            <span>🔑</span>
+            <span>診断結果を受け取りました。あなたに合うコンテンツを表示しています。</span>
+          </div>
+        )}
 
         {/* ── 3. Category filter tabs ──────────────── */}
         <section>
