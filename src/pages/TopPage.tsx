@@ -42,9 +42,6 @@ const SEASON_EMOJI: Record<string, string> = {
 }
 
 const COMING_SOON = [
-  { emoji: '🌙', label: '夢診断' },
-  { emoji: '🎨', label: 'カラータイプ診断' },
-  { emoji: '⚡', label: '決断力診断' },
   { emoji: '💤', label: '睡眠タイプ診断' },
   { emoji: '🏆', label: '強み発見テスト' },
   { emoji: '🚨', label: '防災チェック' },
